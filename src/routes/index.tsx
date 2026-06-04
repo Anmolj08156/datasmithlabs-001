@@ -66,24 +66,24 @@ function Index() {
           }}
         />
 
-        <div className="container-wide relative z-10 pt-40 pb-32 max-w-[1240px]">
+        <div className="container-wide relative z-10 pt-32 sm:pt-40 pb-20 sm:pb-32 max-w-[1240px]">
           <div className="stagger max-w-[640px]">
             <p className="eyebrow">Research · Intelligence · Innovation</p>
-            <h1 className="mt-6 text-white font-serif italic font-light leading-[1.05] text-[clamp(44px,7vw,76px)]">
+            <h1 className="mt-6 text-white font-serif italic font-light leading-[1.05] text-[clamp(36px,7vw,72px)]">
               Transforming Data
               <br />
               into <span className="not-italic font-normal">Discovery</span>
             </h1>
-            <p className="mt-7 text-[17px] leading-[1.6] text-white/70 max-w-[500px]">
+            <p className="mt-7 text-[16px] sm:text-[17px] leading-[1.6] text-white/70 max-w-[500px]">
               We don't just analyze data — we transform it into intelligent systems,
               meaningful research, and sustainable growth for institutions that take
               their work seriously.
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-5">
-              <Link to="/contact" className="btn btn-white">
+            <div className="mt-9 flex flex-wrap items-center gap-4 sm:gap-5">
+              <Link to="/contact" className="btn btn-white w-full sm:w-auto text-center">
                 Book a Consultation
               </Link>
-              <a href="#services" className="btn btn-ghost-light">
+              <a href="#services" className="btn btn-ghost-light w-full sm:w-auto text-center justify-center">
                 Explore Services →
               </a>
             </div>
@@ -91,7 +91,7 @@ function Index() {
         </div>
 
         {/* Marquee */}
-        <div className="absolute bottom-16 left-0 right-0 overflow-hidden z-10">
+        <div className="absolute bottom-12 sm:bottom-16 left-0 right-0 overflow-hidden z-10">
           <div className="marquee-track">
             {[...trustLogos, ...trustLogos].map((l, i) => (
               <span
@@ -105,7 +105,7 @@ function Index() {
         </div>
 
         {/* Chevron */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 float-chevron text-white/60">
+        <div className="absolute bottom-4 sm:bottom-5 left-1/2 -translate-x-1/2 z-10 float-chevron text-white/60">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M6 9l6 6 6-6" />
           </svg>
@@ -113,35 +113,35 @@ function Index() {
       </section>
 
       {/* ───────────────── 01 SERVICES ───────────────── */}
-      <section id="services" className="bg-white py-28">
+      <section id="services" className="bg-white py-20 sm:py-28">
         <div className="container-wide">
           <Reveal>
             <p className="eyebrow">01 — What We Do</p>
-            <h2 className="mt-5 font-serif italic text-[clamp(32px,4.2vw,44px)] leading-[1.15] max-w-[720px]">
+            <h2 className="mt-5 font-serif italic text-[clamp(28px,4.2vw,44px)] leading-[1.15] max-w-[720px]">
               A portfolio of services for institutions that demand both rigor
               and outcomes.
             </h2>
           </Reveal>
 
-          <div className="mt-16 border-t border-[color:var(--border)]">
+          <div className="mt-12 sm:mt-16 border-t border-[color:var(--border)]">
             {services.map((s) => (
               <Reveal key={s.n}>
-                <div className="service-row grid grid-cols-12 items-center gap-6 py-9 px-4 border-b border-[color:var(--border)] cursor-pointer">
-                  <div className="col-span-1 font-mono text-[13px] text-[color:var(--text-muted)]">
+                <div className="service-row grid grid-cols-12 items-start md:items-center gap-x-4 gap-y-5 py-8 sm:py-9 px-2 sm:px-4 border-b border-[color:var(--border)] cursor-pointer">
+                  <div className="col-span-2 md:col-span-1 font-mono text-[13px] text-[color:var(--text-muted)] pt-1 md:pt-0">
                     {s.n}
                   </div>
-                  <div className="col-span-12 md:col-span-6">
-                    <h3 className="font-serif text-[clamp(24px,3vw,36px)] text-[color:var(--ink)] leading-tight">
+                  <div className="col-span-10 md:col-span-6">
+                    <h3 className="font-serif text-[clamp(20px,3vw,36px)] text-[color:var(--ink)] leading-tight">
                       {s.title}
                     </h3>
-                    <p className="mt-2 text-[15px] text-[color:var(--text-muted)]">{s.desc}</p>
+                    <p className="mt-2 text-[14px] sm:text-[15px] text-[color:var(--text-muted)]">{s.desc}</p>
                   </div>
-                  <div className="col-span-12 md:col-span-4 flex flex-wrap gap-2">
+                  <div className="col-span-10 col-start-3 md:col-span-4 md:col-start-auto flex flex-wrap gap-2">
                     {s.tags.map((t) => (
                       <span key={t} className="pill">{t}</span>
                     ))}
                   </div>
-                  <div className="col-span-12 md:col-span-1 text-right arrow text-[color:var(--ink)] text-2xl">
+                  <div className="hidden md:block md:col-span-1 text-right arrow text-[color:var(--ink)] text-2xl">
                     →
                   </div>
                 </div>
@@ -152,19 +152,19 @@ function Index() {
       </section>
 
       {/* ───────────────── 02 BRAND STORY (DARK) ───────────────── */}
-      <section className="bg-[color:var(--navy)] py-[120px] text-white">
-        <div className="container-wide grid lg:grid-cols-12 gap-14 items-stretch">
+      <section className="bg-[color:var(--navy)] py-20 sm:py-[120px] text-white">
+        <div className="container-wide grid lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
           <Reveal className="lg:col-span-7">
             <p className="eyebrow-muted">02 — Our Origin</p>
-            <blockquote className="mt-7 font-serif italic font-light text-[clamp(28px,3.6vw,48px)] leading-[1.15]">
+            <blockquote className="mt-7 font-serif italic font-light text-[clamp(24px,3.6vw,48px)] leading-[1.15]">
               "We don't just analyze data — we transform it into intelligent
               solutions, meaningful discoveries, and sustainable growth."
             </blockquote>
 
-            <div className="mt-12 pt-10 border-t border-[color:var(--border-dark)] grid sm:grid-cols-2 gap-10">
+            <div className="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-[color:var(--border-dark)] grid sm:grid-cols-2 gap-8 sm:gap-10">
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/45">Mission</p>
-                <p className="mt-3 text-[15px] leading-[1.65] text-white/65">
+                <p className="mt-3 text-[14px] sm:text-[15px] leading-[1.65] text-white/65">
                   To advance research-led innovation by embedding scientific
                   method into every product we ship and every institution we
                   partner with.
@@ -172,7 +172,7 @@ function Index() {
               </div>
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/45">Vision</p>
-                <p className="mt-3 text-[15px] leading-[1.65] text-white/65">
+                <p className="mt-3 text-[14px] sm:text-[15px] leading-[1.65] text-white/65">
                   A future where every decision — academic, industrial, social
                   — is informed by intelligence systems we can trust and
                   inspect.
@@ -183,7 +183,7 @@ function Index() {
 
           <Reveal className="lg:col-span-5">
             <div
-              className="relative h-full min-h-[420px] rounded-lg overflow-hidden"
+              className="relative h-full min-h-[300px] sm:min-h-[420px] rounded-lg overflow-hidden"
               style={{
                 backgroundImage:
                   "linear-gradient(rgba(15,35,71,0.15), rgba(15,35,71,0.15)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900')",
@@ -197,18 +197,24 @@ function Index() {
 
       {/* ───────────────── STATS ───────────────── */}
       <section className="bg-[color:var(--off-white)] border-y border-[color:var(--border)]">
-        <div className="container-wide grid grid-cols-2 md:grid-cols-4 divide-x divide-[color:var(--border)]">
+        <div className="container-wide grid grid-cols-2 md:grid-cols-4">
           {[
-            { n: 100, suffix: "+", label: "Research Projects" },
-            { n: 50, suffix: "+", label: "Partner Institutions" },
-            { n: 5, suffix: "+", label: "Years of Practice" },
+            { n: 10, suffix: "+", label: "Ongoing Projects" },
+            { n: 15, suffix: "+", label: "Partner Institutions" },
+            { n: 2, suffix: "+", label: "Years of Practice" },
             { n: 4, suffix: "", label: "Core Service Areas" },
-          ].map((s) => (
-            <div key={s.label} className="py-14 px-6 text-center">
-              <p className="font-serif italic text-[clamp(40px,5vw,64px)] text-[color:var(--ink)] leading-none">
+          ].map((s, index) => (
+            <div 
+              key={s.label} 
+              className={`py-10 md:py-14 px-4 sm:px-6 text-center border-[color:var(--border)]
+                ${index < 2 ? "border-b" : ""} 
+                ${index % 2 === 0 ? "border-r" : ""} 
+                md:border-b-0 md:border-r md:last:border-r-0`}
+            >
+              <p className="font-serif italic text-[clamp(32px,5vw,64px)] text-[color:var(--ink)] leading-none">
                 <CountUp to={s.n} suffix={s.suffix} />
               </p>
-              <p className="mt-3 font-sans text-[13px] text-[color:var(--text-muted)] tracking-wide">
+              <p className="mt-3 font-sans text-[12px] sm:text-[13px] text-[color:var(--text-muted)] tracking-wide">
                 {s.label}
               </p>
             </div>
@@ -217,7 +223,7 @@ function Index() {
       </section>
 
       {/* ───────────────── 03 TRAINING (DARK PHOTO) ───────────────── */}
-      <section className="relative py-[120px] text-white overflow-hidden">
+      <section className="relative py-20 sm:py-[120px] text-white overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -226,13 +232,13 @@ function Index() {
         />
         <div className="absolute inset-0 bg-[rgba(11,21,38,0.78)]" />
 
-        <div className="container-wide relative z-10 grid lg:grid-cols-2 gap-14">
+        <div className="container-wide relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-14">
           <Reveal>
             <p className="eyebrow-muted">03 — Training</p>
-            <h2 className="mt-5 font-serif italic text-[clamp(32px,4.2vw,52px)] leading-[1.1] text-white">
+            <h2 className="mt-5 font-serif italic text-[clamp(28px,4.2vw,52px)] leading-[1.1] text-white">
               Programs that turn knowledge into capability.
             </h2>
-            <p className="mt-6 text-[17px] text-white/70 max-w-[500px]">
+            <p className="mt-6 text-[16px] sm:text-[17px] text-white/70 max-w-[500px]">
               We design and deliver corporate workshops, faculty development
               programs, and certifications grounded in current research and
               shipped to production teams.
@@ -245,7 +251,7 @@ function Index() {
                 "Outcomes measured against real organizational KPIs",
                 "Cohort sizes that allow real mentorship",
               ].map((t) => (
-                <li key={t} className="flex gap-3 text-[15px]">
+                <li key={t} className="flex gap-3 text-[14px] sm:text-[15px]">
                   <span className="text-[color:var(--cyan)]">•</span>
                   <span>{t}</span>
                 </li>
@@ -253,7 +259,7 @@ function Index() {
             </ul>
 
             <div className="mt-10">
-              <Link to="/contact" className="btn btn-white">
+              <Link to="/contact" className="btn btn-white w-full sm:w-auto text-center justify-center">
                 Discuss a Program
               </Link>
             </div>
@@ -265,10 +271,10 @@ function Index() {
               { name: "Faculty Development Programs", desc: "Multi-week programs equipping academic faculty with applied AI methodology.", meta: "4 WEEKS · COHORT" },
               { name: "Certification Courses", desc: "Structured certifications in AI, ML, and applied data science.", meta: "8–12 WEEKS · CERTIFIED" },
             ].map((c) => (
-              <div key={c.name} className="bg-white text-[color:var(--ink)] rounded-lg p-7">
-                <h3 className="font-serif text-[20px] leading-tight">{c.name}</h3>
-                <p className="mt-2 text-[14px] text-[color:var(--text-body)]">{c.desc}</p>
-                <p className="mt-4 font-mono text-[11px] tracking-[0.12em] text-[color:var(--text-muted)]">
+              <div key={c.name} className="bg-white text-[color:var(--ink)] rounded-lg p-6 sm:p-7">
+                <h3 className="font-serif text-[18px] sm:text-[20px] leading-tight">{c.name}</h3>
+                <p className="mt-2 text-[13px] sm:text-[14px] text-[color:var(--text-body)]">{c.desc}</p>
+                <p className="mt-4 font-mono text-[10px] sm:text-[11px] tracking-[0.12em] text-[color:var(--text-muted)]">
                   {c.meta}
                 </p>
               </div>
@@ -278,14 +284,14 @@ function Index() {
       </section>
 
       {/* ───────────────── 04 RESEARCH & INNOVATION ───────────────── */}
-      <section className="bg-white py-28 overflow-hidden">
-        <div className="container-wide grid lg:grid-cols-2 gap-16 items-center">
+      <section className="bg-white py-20 sm:py-28 overflow-hidden">
+        <div className="container-wide grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <Reveal>
             <p className="eyebrow">04 — Research & Innovation</p>
-            <h2 className="mt-5 font-serif italic text-[clamp(32px,4.2vw,48px)] leading-[1.15]">
+            <h2 className="mt-5 font-serif italic text-[clamp(28px,4.2vw,48px)] leading-[1.15]">
               Where academic depth meets industry application.
             </h2>
-            <div className="mt-7 space-y-5 text-[16px] leading-[1.7] text-[color:var(--text-body)]">
+            <div className="mt-7 space-y-5 text-[15px] sm:text-[16px] leading-[1.7] text-[color:var(--text-body)]">
               <p>
                 Our research consulting practice partners with universities,
                 public institutions, and R&D divisions of industry to take
@@ -321,8 +327,8 @@ function Index() {
                 { k: "20+", v: "Researchers" },
               ].map((s) => (
                 <div key={s.v} className="border-t border-[color:var(--border)] pt-4">
-                  <p className="font-mono text-[20px] text-[color:var(--ink)]">{s.k}</p>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[color:var(--text-muted)] mt-1">
+                  <p className="font-mono text-[18px] sm:text-[20px] text-[color:var(--ink)]">{s.k}</p>
+                  <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.12em] text-[color:var(--text-muted)] mt-1">
                     {s.v}
                   </p>
                 </div>
@@ -333,26 +339,28 @@ function Index() {
       </section>
 
       {/* ───────────────── CONTACT (HOME) ───────────────── */}
-      <section className="bg-[color:var(--off-white)] py-28">
+      <section className="bg-[color:var(--off-white)] py-20 sm:py-28">
         <div className="container-wide max-w-[820px] text-center">
           <Reveal>
             <p className="eyebrow">Get in Touch</p>
-            <h2 className="mt-5 font-serif italic text-[clamp(32px,4.2vw,52px)] leading-[1.15]">
+            <h2 className="mt-5 font-serif italic text-[clamp(28px,4.2vw,52px)] leading-[1.15]">
               Let's build something meaningful.
             </h2>
-            <p className="mt-6 text-[17px] text-[color:var(--text-body)]">
+            <p className="mt-6 text-[15px] sm:text-[17px] text-[color:var(--text-body)]">
               Tell us about your institution, your data, or the question
               you're trying to answer. We'll set up a free consultation.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-[16px]">
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-8 sm:gap-x-12 gap-y-4 text-[15px] sm:text-[16px]">
               <a href="mailto:datasmithlabs@gmail.com" className="link-cyan">datasmithlabs@gmail.com</a>
+              <span className="hidden sm:inline text-black/20">·</span>
               <a href="tel:+917017283915" className="link-cyan">+91 7017 283 915</a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="link-cyan">LinkedIn</a>
+              <span className="hidden sm:inline text-black/20">·</span>
+              <a href="https://www.linkedin.com/company/datasmith-labs" target="_blank" rel="noreferrer" className="link-cyan">LinkedIn</a>
             </div>
 
             <div className="mt-10">
-              <Link to="/contact" className="btn btn-ink btn-lg">
+              <Link to="/contact" className="btn btn-ink btn-lg w-full sm:w-auto text-center justify-center">
                 Book a Free Consultation →
               </Link>
             </div>

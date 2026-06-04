@@ -5,10 +5,10 @@ export function Footer() {
     <footer className="bg-[color:var(--ink)] text-white">
       <div className="container-wide py-16">
         <div className="grid md:grid-cols-3 items-center gap-8 pb-10 border-b border-[color:var(--border-dark)]">
-          <Link to="/" className="flex items-center gap-3">
-            <span className="font-serif text-[22px] font-medium">DataSmith</span>
-            <span className="h-4 w-px bg-white/20" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/55">
+          <Link to="/" className="flex items-center justify-center md:justify-start gap-3 flex-nowrap shrink-0">
+            <span className="font-serif text-[22px] font-medium whitespace-nowrap">DataSmith</span>
+            <span className="h-4 w-px bg-white/20 shrink-0" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/55 whitespace-nowrap">
               Research Labs
             </span>
           </Link>
@@ -18,10 +18,10 @@ export function Footer() {
           </p>
 
           <a
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/company/datasmith-labs"
             target="_blank"
             rel="noreferrer"
-            className="font-sans text-[14px] text-white/70 hover:text-[color:var(--cyan)] md:justify-self-end"
+            className="font-sans text-[14px] text-white/70 hover:text-[color:var(--cyan)] text-center md:text-right w-full md:w-auto md:justify-self-end"
           >
             LinkedIn →
           </a>

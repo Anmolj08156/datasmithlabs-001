@@ -62,22 +62,20 @@ function ProductsPage() {
                   Active Product · AI-Powered Learning
                 </p>
                 <h2 className="mt-5 font-serif italic text-[clamp(32px,4.2vw,48px)] leading-[1.1] text-white">
-                  AI Learning Companion
+                  AI Study Companion
                 </h2>
                 <p className="mt-5 text-[16px] text-white/70 leading-[1.65] max-w-[520px]">
-                  An adaptive learning system that pairs each learner with a
-                  personalized AI tutor, calibrated to their current skill,
-                  pace, and learning goals.
+                  An intelligent learning platform that transforms study materials into personalized learning experiences. Upload documents, generate AI-powered summaries, explore concepts in depth, create practice quizzes, and chat directly with your notes for faster and more effective learning.
                 </p>
 
                 <ul className="mt-7 space-y-2.5 text-[14px] text-white/85">
                   {[
-                    "Adaptive curriculum that responds to learner performance",
-                    "Conversational tutoring grounded in your own course material",
-                    "Faculty dashboards with cohort-level analytics",
-                    "Plagiarism-resistant assessment generation",
-                    "Integrations with major LMS platforms",
-                    "On-premise deployment for sensitive datasets",
+                    "Upload PDFs and generate structured AI summaries",
+                    "Highlight any keyword to get detailed explanations and context",
+                    "Create AI-powered quizzes from your study material",
+                    "Chat with your notes using a document-grounded AI assistant",
+                    "Export enriched notes with annotations and insights",
+                    "Discover, share, and bookmark community-created study resources",
                   ].map((f) => (
                     <li key={f} className="flex gap-3">
                       <span className="text-[color:var(--cyan)]">→</span>
@@ -86,11 +84,27 @@ function ProductsPage() {
                   ))}
                 </ul>
 
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {[
+                    "AI Summary",
+                    "Keyword Explanation",
+                    "Quiz Generator",
+                    "AI Chat",
+                    "PDF Export",
+                    "Community Module",
+                    "Reward Ecosystem",
+                  ].map((tag) => (
+                    <span key={tag} className="px-2.5 py-1 rounded bg-white/10 text-white/80 font-mono text-[10px] uppercase tracking-wider border border-white/5">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
                 <div className="mt-9 flex items-center gap-5">
-                  <button className="btn btn-cyan">Try Now →</button>
+                  <button className="btn btn-cyan">Explore Platform →</button>
                   <span className="font-mono text-[11px] flex items-center gap-2 text-white/70">
-                    <span className="w-2 h-2 rounded-full bg-green-400 inline-block" />
-                    Live
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-400 inline-block animate-pulse" />
+                    🟢 Live
                   </span>
                 </div>
               </div>
@@ -99,20 +113,20 @@ function ProductsPage() {
               <div className="bg-[color:var(--navy-mid)] rounded-lg p-6 border border-white/10">
                 <div className="flex items-center justify-between">
                   <p className="font-mono text-[11px] text-white/55 uppercase tracking-[0.14em]">
-                    Cohort · Spring '26
+                    COHORT • ACTIVE USERS
                   </p>
                   <span className="font-mono text-[10px] text-[color:var(--cyan)]">LIVE</span>
                 </div>
 
                 <div className="mt-6 grid grid-cols-3 gap-4">
                   {[
-                    { k: "287", v: "Learners" },
-                    { k: "94%", v: "Engagement" },
-                    { k: "+38%", v: "vs Baseline" },
+                    { k: "287", v: "STUDENTS" },
+                    { k: "94%", v: "ENGAGEMENT" },
+                    { k: "+38%", v: "LEARNING EFFICIENCY" },
                   ].map((s) => (
                     <div key={s.v}>
                       <p className="font-serif italic text-[28px] text-white">{s.k}</p>
-                      <p className="font-mono text-[10px] text-white/50 uppercase tracking-[0.12em] mt-1">
+                      <p className="font-mono text-[9px] text-white/50 uppercase tracking-[0.08em] mt-1 leading-tight">
                         {s.v}
                       </p>
                     </div>
@@ -121,7 +135,7 @@ function ProductsPage() {
 
                 <div className="mt-7">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="font-mono text-[11px] text-white/55">Curriculum Mastery</p>
+                    <p className="font-mono text-[11px] text-white/55">Knowledge Mastery</p>
                     <p className="font-mono text-[11px] text-white/85">72%</p>
                   </div>
                   <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
@@ -131,9 +145,10 @@ function ProductsPage() {
 
                 <div className="mt-7 space-y-3">
                   {[
-                    { label: "Module 04 — Probability", val: "Active" },
-                    { label: "Module 05 — Inference", val: "Up next" },
-                    { label: "Module 06 — Bayesian", val: "Locked" },
+                    { label: "AI Summary Generation", val: "ACTIVE" },
+                    { label: "Smart Quiz Builder", val: "UP NEXT" },
+                    { label: "AI Notes Chat", val: "LIVE" },
+                    { label: "Community Learning", val: "ACTIVE" },
                   ].map((r) => (
                     <div key={r.label} className="flex items-center justify-between border-t border-white/10 pt-3">
                       <p className="font-mono text-[12px] text-white/75">{r.label}</p>

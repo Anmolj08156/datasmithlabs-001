@@ -14,10 +14,23 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-const team = Array.from({ length: 6 }).map((_, i) => ({
-  name: ["Dr. A. Iyer", "Dr. M. Sharma", "P. Banerjee", "Dr. R. Kumar", "S. Mehta", "K. Singh"][i],
-  role: ["Director, Research", "Head of AI", "Lead Data Scientist", "Principal Researcher", "Training Lead", "Engineering Lead"][i],
-}));
+const team = [
+  {
+    name: "Anmol Jain",
+    role: "Founder and Lead Architect",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&auto=format&fit=crop&q=80",
+  },
+  {
+    name: "Dr. Udit Jain",
+    role: "Professor and Head VPH Department DUVASU Mathura (Lead Researcher)",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=80",
+  },
+  {
+    name: "Vidhi Khandelwal",
+    role: "Intern",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop&q=80",
+  },
+];
 
 function AboutPage() {
   return (
@@ -87,7 +100,15 @@ function AboutPage() {
             {team.map((m) => (
               <Reveal key={m.name}>
                 <div className="border border-[color:var(--border)] rounded-lg p-7 hover:border-[color:var(--blue)] transition-colors">
-                  <div className="aspect-[4/3] rounded-md bg-gradient-to-br from-[color:var(--off-white)] to-[color:var(--border)] mb-5" />
+                  <div className="aspect-[4/3] rounded-md overflow-hidden bg-gradient-to-br from-[color:var(--off-white)] to-[color:var(--border)] mb-5">
+                    {m.image ? (
+                      <img
+                        src={m.image}
+                        alt={m.name}
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                      />
+                    ) : null}
+                  </div>
                   <h3 className="font-serif text-[22px] text-[color:var(--ink)]">{m.name}</h3>
                   <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-[color:var(--text-muted)]">
                     {m.role}
