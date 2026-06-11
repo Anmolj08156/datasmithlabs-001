@@ -5,10 +5,14 @@ import { Reveal, CountUp } from "../components/site/Reveal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DataSmith Research Labs — Transforming Data into Discovery" },
-      { name: "description", content: "AI, data science, research consulting, and corporate training. Academic rigor applied to industry problems." },
-      { property: "og:title", content: "DataSmith Research Labs" },
-      { property: "og:description", content: "Transforming data into discovery — AI, data science, research, and training." },
+      { title: "Datasmith Labs | AI Solutions & Research" },
+      {
+        name: "description",
+        content: "Datasmith Labs provides AI solutions, enterprise automation, research services and intelligent digital products.",
+      },
+      { property: "og:title", content: "Datasmith Labs" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://datasmithlabs.com" },
       { property: "og:image", content: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1600" },
     ],
   }),
