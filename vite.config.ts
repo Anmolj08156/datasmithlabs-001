@@ -15,6 +15,6 @@ export default defineConfig({
   ],
   server: {
     port: 8012,
-    allowedHosts: ["ar.cyberpunk.co.in"],
+    allowedHosts: true,
   },
 });
