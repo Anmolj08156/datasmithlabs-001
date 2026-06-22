@@ -177,7 +177,7 @@ function ProductsPage() {
   const [submitted, setSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState("Understand");
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
       toast.error("Please enter a valid email address.");
@@ -185,7 +185,23 @@ function ProductsPage() {
     }
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbxgb_5tjfz4rw1wafg5RezCXbzDVSExLneSo-m7ydCxUIdM9gl28BQbAibll0sBgml9hg/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain",
+        },
+        body: JSON.stringify({
+          id: "wl_" + Math.random().toString(36).substring(2, 9),
+          email: email.trim().toLowerCase(),
+          name: "",
+          created_at: new Date().toISOString(),
+          source: "website",
+          device: typeof window !== "undefined" ? window.navigator.userAgent : "ssr",
+        }),
+      });
+
       setIsSubmitting(false);
       setSubmitted(true);
       toast.success("Welcome aboard!", {
@@ -197,7 +213,11 @@ function ProductsPage() {
       } catch (err) {
         console.error(err);
       }
-    }, 1000);
+    } catch (err) {
+      console.error(err);
+      setIsSubmitting(false);
+      toast.error("Subscription failed. Please try again.");
+    }
   };
 
   return (
