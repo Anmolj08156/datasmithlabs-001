@@ -6,6 +6,7 @@ const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/products", label: "Products" },
+  { to: "/partnerships", label: "Partners" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -52,9 +53,10 @@ export function Nav({ variant = "auto" }: { variant?: "auto" | "light" | "dark" 
   const logoColor = scrolled || !isLight ? "text-[color:var(--ink)]" : "text-white";
   const burgerColor = scrolled || !isLight ? (isOpen ? "text-white" : "text-[color:var(--ink)]") : "text-white";
   
+  // Five nav links + the CTA no longer fit at md, so the CTA only appears from lg up.
   const ctaCls = scrolled || !isLight
-    ? "btn btn-ink !h-10 !text-[12px] !hidden md:!inline-flex"
-    : "btn !h-10 !text-[12px] bg-white text-[color:var(--ink)] hover:bg-[color:var(--off-white)] !hidden md:!inline-flex";
+    ? "btn btn-ink !h-10 !text-[12px] !hidden lg:!inline-flex"
+    : "btn !h-10 !text-[12px] bg-white text-[color:var(--ink)] hover:bg-[color:var(--off-white)] !hidden lg:!inline-flex";
 
   return (
     <>
@@ -71,7 +73,7 @@ export function Nav({ variant = "auto" }: { variant?: "auto" | "light" | "dark" 
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {links.map((l) => (
               <Link
                 key={l.to}

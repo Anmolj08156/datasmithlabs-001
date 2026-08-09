@@ -18,10 +18,12 @@ const team = [
   {
     name: "Anmol Jain",
     role: "Founder and Lead Architect",
+    education: "LNMIIT Jaipur — Alumni",
   },
   {
-    name: "Dr. Udit Jain",
-    role: "Professor and Head VPH Department DUVASU Mathura (Lead Researcher)",
+    name: "Divyansh Agarwal",
+    role: "Co-Founder",
+    education: "LNMIIT Jaipur — Alumni",
   },
 ];
 
@@ -84,6 +86,9 @@ function AboutPage() {
                   <h3 className="font-serif text-[22px] text-[color:var(--ink)]">{m.name}</h3>
                   <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[color:var(--text-muted)] leading-relaxed">
                     {m.role}
+                  </p>
+                  <p className="mt-4 pt-4 border-t border-[color:var(--border)] font-mono text-[11px] uppercase tracking-[0.12em] text-[color:var(--blue)]">
+                    {m.education}
                   </p>
                 </div>
               </Reveal>
