@@ -177,10 +177,14 @@
 }
 
 /* Outlined "ghost" numerals used to index sections and list rows. */
+/* Outlined numerals. `color` stays inherited so the stroke tracks the
+   surrounding text colour (including the hover invert); only the fill is
+   cleared — setting `color: transparent` would make currentColor transparent
+   and the stroke would vanish with it. */
 .ghost-num {
   font-family: var(--font-serif);
   font-weight: 900;
-  color: transparent;
+  -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1.5px currentColor;
   line-height: 0.8;
   letter-spacing: -0.03em;

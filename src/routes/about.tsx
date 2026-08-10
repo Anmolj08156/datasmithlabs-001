@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "../components/site/Reveal";
 import { Canvas3D } from "../components/three/Canvas3D";
 
@@ -6,10 +6,13 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — DataSmith Research Labs" },
-      { name: "description", content: "Our origin, mission, and the team building research-led AI at DataSmith Research Labs." },
+      {
+        name: "description",
+        content:
+          "Our origin, mission, and the team building research-led AI at DataSmith Research Labs.",
+      },
       { property: "og:title", content: "About — DataSmith Research Labs" },
       { property: "og:description", content: "Research-led AI for serious institutions." },
-      { property: "og:image", content: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900" },
     ],
   }),
   component: AboutPage,
@@ -17,11 +20,13 @@ export const Route = createFileRoute("/about")({
 
 const team = [
   {
+    n: "01",
     name: "Anmol Jain",
     role: "Founder and Lead Architect",
     education: "LNMIIT Jaipur — Alumni",
   },
   {
+    n: "02",
     name: "Divyansh Agarwal",
     role: "Co-Founder",
     education: "LNMIIT Jaipur — Alumni",
@@ -31,71 +36,117 @@ const team = [
 function AboutPage() {
   return (
     <>
-      <section className="pt-[140px] pb-20 bg-white">
-        <div className="container-wide max-w-[920px]">
-          <Reveal>
-            <p className="eyebrow">About</p>
-            <h1 className="mt-6 font-serif italic text-[clamp(40px,5vw,64px)] leading-[1.08]">
-              A research lab disguised as a company.
-            </h1>
-            <p className="mt-7 text-[18px] text-[color:var(--text-body)] leading-[1.65] max-w-[680px]">
-              DataSmith Research Labs was founded by researchers who got tired
-              of watching good science die in PDFs. We build the systems, the
-              partnerships, and the training programs that move research from
-              the page into production.
-            </p>
-          </Reveal>
+      {/* ═══════════ HERO ═══════════ */}
+      <section className="bg-[color:var(--ink)] text-white pt-[72px] border-b-2 border-[color:var(--ink)]">
+        <div className="container-wide pt-16 pb-16 sm:pt-24 sm:pb-24 stagger">
+          <p className="label text-[color:var(--cyan)]">About</p>
+          <h1 className="mt-8 display display-xl">
+            A research lab
+            <br />
+            <span className="text-[color:var(--cyan)]">disguised</span>
+            <br />
+            as a company.
+          </h1>
+          <p className="mt-12 font-sans text-[16px] sm:text-[18px] leading-[1.55] text-white/75 max-w-[54ch]">
+            DataSmith Research Labs was founded by researchers who got tired of watching good
+            science die in PDFs. We build the systems, the partnerships, and the training programs
+            that move research from the page into production.
+          </p>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[color:var(--navy)] text-white py-[120px]">
+      {/* ═══════════ 01 · OUR STORY ═══════════ */}
+      <section className="relative bg-[color:var(--navy)] text-white overflow-hidden py-20 sm:py-28">
         <Canvas3D variant="wave" className="absolute inset-0" />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--navy)] via-[color:var(--navy)]/70 to-transparent" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--navy)] via-[color:var(--navy)]/75 to-transparent" />
+
         <div className="container-wide relative z-10">
-          <Reveal className="max-w-[720px]">
-            <p className="eyebrow-muted">Our Story</p>
-            <h2 className="mt-5 font-serif italic text-[clamp(28px,3.6vw,40px)] leading-[1.15] text-white">
-              Built at the seam between academia and industry.
+          <Reveal className="max-w-[760px]">
+            <p className="label text-[color:var(--cyan)]">01 — Our Story</p>
+            <h2 className="mt-6 display display-md">
+              Built at the seam
+              <br />
+              between academia
+              <br />
+              and industry.
             </h2>
-            <div className="mt-7 space-y-5 text-[16px] leading-[1.7] text-white/70">
+            <div className="mt-9 space-y-6 font-sans text-[15px] sm:text-[16px] leading-[1.65] text-white/75 max-w-[56ch]">
               <p>
-                The lab grew out of a simple frustration: most "AI consultancies"
-                don't read papers, and most research labs don't ship. We sit
-                deliberately in between.
+                The lab grew out of a simple frustration: most "AI consultancies" don't read papers,
+                and most research labs don't ship. We sit deliberately in between.
               </p>
               <p>
-                Every engagement we take on is treated as a small research
-                project — with hypotheses, controls, peer review, and reproducible
-                code — and then handed off as production-grade software.
+                Every engagement we take on is treated as a small research project — with
+                hypotheses, controls, peer review, and reproducible code — and then handed off as
+                production-grade software.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-white py-24">
+      {/* ═══════════ 02 · THE TEAM ═══════════ */}
+      <section className="bg-white text-[color:var(--ink)] py-20 sm:py-28">
         <div className="container-wide">
           <Reveal>
-            <p className="eyebrow">The Team</p>
-            <h2 className="mt-5 font-serif italic text-[clamp(28px,3.6vw,42px)] leading-[1.15] max-w-[640px]">
-              Researchers, engineers, and educators working in one room.
-            </h2>
+            <div className="grid lg:grid-cols-12 gap-8 items-end pb-12">
+              <div className="lg:col-span-7">
+                <p className="label text-[color:var(--cyan)]">02 — The Team</p>
+                <h2 className="mt-6 display display-lg">
+                  Researchers.
+                  <br />
+                  Engineers.
+                  <br />
+                  Educators.
+                </h2>
+              </div>
+              <p className="lg:col-span-5 font-sans text-[16px] leading-[1.6] text-[color:var(--text-body)]">
+                Working in one room.
+              </p>
+            </div>
           </Reveal>
 
-          <div className="mt-14 grid sm:grid-cols-2 gap-8 max-w-[800px]">
+          <div>
             {team.map((m) => (
               <Reveal key={m.name}>
-                <div className="border border-[color:var(--border)] rounded-lg p-7 hover:border-[color:var(--blue)] transition-colors min-h-[140px] flex flex-col justify-center">
-                  <h3 className="font-serif text-[22px] text-[color:var(--ink)]">{m.name}</h3>
-                  <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[color:var(--text-muted)] leading-relaxed">
-                    {m.role}
-                  </p>
-                  <p className="mt-4 pt-4 border-t border-[color:var(--border)] font-mono text-[11px] uppercase tracking-[0.12em] text-[color:var(--blue)]">
-                    {m.education}
-                  </p>
+                <div className="brut-row brut-row-light group px-2 sm:px-5 py-9 sm:py-12 grid grid-cols-12 gap-x-4 gap-y-4 items-baseline">
+                  <span className="col-span-2 md:col-span-1 ghost-num text-[clamp(30px,4.5vw,58px)]">
+                    {m.n}
+                  </span>
+                  <h3 className="col-span-10 md:col-span-6 display text-[clamp(26px,4vw,58px)]">
+                    {m.name}
+                  </h3>
+                  <div className="col-span-12 md:col-span-5 md:text-right">
+                    <p className="label text-[10px] opacity-70">{m.role}</p>
+                    <p className="mt-2.5 label text-[10px] text-[color:var(--cyan)] group-hover:text-[color:var(--cyan)]">
+                      {m.education}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════ CTA ═══════════ */}
+      <section className="bg-[color:var(--ink)] text-white border-t-2 border-[color:var(--ink)] py-20 sm:py-24">
+        <div className="container-wide grid lg:grid-cols-12 gap-8 items-end">
+          <div className="lg:col-span-8">
+            <p className="label text-[color:var(--cyan)]">Work With Us</p>
+            <h2 className="mt-6 display text-[clamp(30px,6vw,86px)]">
+              Bring us a
+              <br />
+              hard question.
+            </h2>
+          </div>
+          <div className="lg:col-span-4 lg:justify-self-end flex flex-wrap gap-3">
+            <Link to="/contact" className="btn btn-cyan btn-lg">
+              Book a Consultation
+            </Link>
+            <Link to="/partnerships" className="btn btn-outline-light btn-lg">
+              See Partners
+            </Link>
           </div>
         </div>
       </section>

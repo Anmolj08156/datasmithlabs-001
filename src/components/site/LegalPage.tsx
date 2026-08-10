@@ -1,18 +1,35 @@
 import type { ReactNode } from "react";
 
-export function LegalPage({ title, updated, children }: { title: string; updated: string; children: ReactNode }) {
+export function LegalPage({
+  title,
+  updated,
+  children,
+}: {
+  title: string;
+  updated: string;
+  children: ReactNode;
+}) {
   return (
-    <section className="bg-white pt-[140px] pb-28 min-h-screen">
-      <div className="container-wide max-w-[760px]">
-        <p className="eyebrow">Legal</p>
-        <h1 className="mt-5 font-serif italic text-[clamp(36px,5vw,52px)] leading-[1.1]">{title}</h1>
-        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--text-muted)]">
-          Last updated · {updated}
-        </p>
-        <div className="mt-12 space-y-6 text-[16px] leading-[1.75] text-[color:var(--text-body)]">
-          {children}
+    <>
+      <section className="bg-[color:var(--ink)] text-white pt-[72px]">
+        <div className="container-wide pt-16 pb-14 sm:pt-20 sm:pb-16">
+          <p className="label text-[color:var(--cyan)]">Legal</p>
+          <h1 className="mt-7 display display-lg">{title}</h1>
         </div>
-      </div>
-    </section>
+        <div className="border-t-2 border-white/20">
+          <div className="container-wide py-5">
+            <p className="label text-[10px] text-white/45">Last updated · {updated}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white text-[color:var(--ink)] border-t-2 border-[color:var(--ink)] py-16 sm:py-24">
+        <div className="container-wide max-w-[820px]">
+          <div className="space-y-6 font-sans text-[16px] leading-[1.75] text-[color:var(--text-body)]">
+            {children}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

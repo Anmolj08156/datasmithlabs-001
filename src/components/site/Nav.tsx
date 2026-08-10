@@ -40,38 +40,36 @@ export function Nav() {
         }`}
       >
         <nav className="container-wide flex items-stretch justify-between h-[72px]">
-          <Link
-            to="/"
-            className="flex items-center gap-3 relative z-50 shrink-0 pr-6 md:border-r-2 md:border-[color:var(--ink)]"
-          >
-            <span className="display text-[19px] tracking-[-0.02em] text-[color:var(--ink)] whitespace-nowrap">
+          <Link to="/" className="flex items-center gap-3.5 relative z-50 shrink-0 pr-6">
+            <span className="display text-[21px] tracking-[-0.015em] text-[color:var(--ink)] whitespace-nowrap">
               DataSmith
             </span>
-            <span className="label text-[9px] text-[color:var(--text-muted)] hidden sm:block leading-none">
+            <span className="label text-[8px] text-[color:var(--text-muted)] hidden sm:block leading-[1.35]">
               Research
               <br />
               Labs
             </span>
           </Link>
 
-          <div className="hidden lg:flex items-stretch">
-            {links.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                className="label text-[10px] px-6 flex items-center text-[color:var(--ink)] border-r-2 border-[color:var(--ink)] first:border-l-2 hover:bg-[color:var(--ink)] hover:text-white transition-colors duration-150"
-                activeProps={{ className: "bg-[color:var(--ink)] text-white" }}
-                activeOptions={{ exact: l.to === "/" }}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-
+          {/* Links, CTA and burger stay welded together as one cell strip. */}
           <div className="flex items-stretch">
+            <div className="hidden lg:flex items-stretch">
+              {links.map((l) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  className="label text-[10px] px-6 flex items-center text-[color:var(--ink)] border-l-2 border-[color:var(--ink)] hover:bg-[color:var(--ink)] hover:text-white transition-colors duration-150"
+                  activeProps={{ className: "bg-[color:var(--ink)] text-white" }}
+                  activeOptions={{ exact: l.to === "/" }}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+
             <Link
               to="/contact"
-              className="hidden md:flex items-center label text-[10px] px-7 bg-[color:var(--cyan)] text-[color:var(--ink)] border-x-2 border-[color:var(--ink)] hover:bg-[color:var(--ink)] hover:text-white transition-colors duration-150"
+              className="hidden md:flex items-center label text-[10px] px-7 bg-[color:var(--cyan)] text-[color:var(--ink)] border-l-2 border-[color:var(--ink)] hover:bg-[color:var(--ink)] hover:text-white transition-colors duration-150"
             >
               Book a Consultation
             </Link>
@@ -86,9 +84,7 @@ export function Nav() {
             >
               <span
                 className={`block w-6 h-[2px] transition-all duration-200 ${
-                  isOpen
-                    ? "bg-[color:var(--ink)] translate-y-[7px] rotate-45"
-                    : "bg-white"
+                  isOpen ? "bg-[color:var(--ink)] translate-y-[7px] rotate-45" : "bg-white"
                 }`}
               />
               <span
@@ -98,9 +94,7 @@ export function Nav() {
               />
               <span
                 className={`block w-6 h-[2px] transition-all duration-200 ${
-                  isOpen
-                    ? "bg-[color:var(--ink)] -translate-y-[7px] -rotate-45"
-                    : "bg-white"
+                  isOpen ? "bg-[color:var(--ink)] -translate-y-[7px] -rotate-45" : "bg-white"
                 }`}
               />
             </button>

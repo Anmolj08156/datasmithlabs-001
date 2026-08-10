@@ -31,8 +31,7 @@ export function Footer() {
         <div className="md:col-span-5">
           <p className="label text-[10px] text-white/40">Research · Intelligence · Innovation</p>
           <p className="mt-5 font-sans text-[15px] leading-[1.6] text-white/70 max-w-[320px]">
-            Transforming data into discovery for institutions that take their work
-            seriously.
+            Transforming data into discovery for institutions that take their work seriously.
           </p>
           <a
             href="https://www.linkedin.com/company/datasmith-labs"

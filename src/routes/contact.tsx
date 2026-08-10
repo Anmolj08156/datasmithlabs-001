@@ -2,17 +2,6 @@ import React, { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "../components/site/Reveal";
 import { toast } from "sonner";
-import { 
-  User, 
-  Building2, 
-  Mail, 
-  Phone, 
-  Calendar, 
-  MessageSquare, 
-  Briefcase,
-  MessageCircle,
-  Clock
-} from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -20,27 +9,51 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact — DataSmith Research Labs" },
       { name: "description", content: "Book a free consultation with DataSmith Research Labs." },
       { property: "og:title", content: "Contact — DataSmith Research Labs" },
-      { property: "og:description", content: "Book a free consultation with DataSmith Research Labs." },
+      {
+        property: "og:description",
+        content: "Book a free consultation with DataSmith Research Labs.",
+      },
     ],
   }),
   component: ContactPage,
 });
+
+const researchAreas = [
+  "Genomic & Clinical Data Analysis",
+  "Public Health & Epidemiological Modeling",
+  "Biostatistics & Experimental Design",
+  "Machine Learning & Predictive Modeling",
+  "Econometrics & Quantitative Finance",
+  "General Data Science & Consulting",
+];
+
+const details = [
+  { label: "Founder & Lead Architect", value: "Anmol Jain" },
+  { label: "Email", value: "datasmithlabs@gmail.com", href: "mailto:datasmithlabs@gmail.com" },
+  { label: "Phone", value: "+91 7017 283 915", href: "tel:+917017283915" },
+  { label: "Office Hours", value: "Mon — Fri · 09:30–18:30 IST" },
+];
 
 function ContactPage() {
   const [name, setName] = useState("");
   const [institution, setInstitution] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [area, setArea] = useState("Genomic & Clinical Data Analysis");
+  const [area, setArea] = useState(researchAreas[0]);
   const [date, setDate] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const buildWhatsAppMessage = () => {
-    const formattedDate = date 
-      ? new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    const formattedDate = date
+      ? new Date(date).toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
       : "—";
-      
+
     return `Hello DataSmith Research Labs,
 
 I'd like to book a free research consultation. Here are my details:
@@ -68,8 +81,7 @@ ${message || "—"}`;
       description: "Redirecting you to WhatsApp shortly.",
     });
 
-    const waText = buildWhatsAppMessage();
-    const encodedMessage = encodeURIComponent(waText);
+    const encodedMessage = encodeURIComponent(buildWhatsAppMessage());
     const whatsappUrl = `https://wa.me/917017283915?text=${encodedMessage}`;
 
     setTimeout(() => {
@@ -78,225 +90,219 @@ ${message || "—"}`;
         description: "Please press 'Send' in WhatsApp to dispatch your consultation request.",
       });
       setIsSubmitting(false);
-    }, 1200);
+    }, 900);
   };
 
   return (
-    <section className="bg-[color:var(--off-white)] pt-[140px] pb-28 min-h-screen">
-      <div className="container-wide max-w-[1000px]">
-        <Reveal>
-          <p className="eyebrow text-center">Get in Touch</p>
-          <h1 className="mt-6 font-serif italic text-[clamp(36px,5vw,52px)] leading-[1.1] text-center text-[color:var(--ink)]">
-            Let's build something meaningful.
+    <>
+      {/* ═══════════ HERO ═══════════ */}
+      <section className="bg-[color:var(--ink)] text-white pt-[72px]">
+        <div className="container-wide pt-16 pb-14 sm:pt-24 sm:pb-20 stagger">
+          <p className="label text-[color:var(--cyan)]">Get in Touch</p>
+          <h1 className="mt-8 display display-xl">
+            Let's build
+            <br />
+            something
+            <br />
+            <span className="text-[color:var(--cyan)]">meaningful.</span>
           </h1>
-          <p className="mt-6 text-[17px] text-[color:var(--text-body)] text-center max-w-[600px] mx-auto">
-            Send us a note about your institution, your data, or the research
-            question you're trying to answer.
+          <p className="mt-12 font-sans text-[16px] sm:text-[18px] leading-[1.55] text-white/75 max-w-[52ch]">
+            Send us a note about your institution, your data, or the research question you're trying
+            to answer.
           </p>
-        </Reveal>
+        </div>
 
-        <div className="mt-16 max-w-[680px] mx-auto">
-          {/* Form */}
+        <div className="border-t-2 border-white/20">
+          <div className="container-wide grid sm:grid-cols-2 lg:grid-cols-4">
+            {details.map((d, i) => (
+              <div
+                key={d.label}
+                className={`py-7 lg:px-8 lg:first:pl-0 border-white/20 ${
+                  i < details.length - 1 ? "border-b-2 sm:border-b-0 lg:border-r-2" : ""
+                } ${i === 0 ? "sm:border-r-2" : ""} ${i === 1 ? "sm:border-b-2 lg:border-b-0" : ""} ${
+                  i === 2 ? "sm:border-r-2" : ""
+                }`}
+              >
+                <p className="label text-[9px] text-white/40">{d.label}</p>
+                {d.href ? (
+                  <a
+                    href={d.href}
+                    className="mt-3 block font-sans text-[15px] text-white hover:text-[color:var(--cyan)] transition-colors break-all"
+                  >
+                    {d.value}
+                  </a>
+                ) : (
+                  <p className="mt-3 font-sans text-[15px] text-white">{d.value}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════ FORM ═══════════ */}
+      <section className="bg-[color:var(--off-white)] text-[color:var(--ink)] border-t-2 border-[color:var(--ink)] py-16 sm:py-24 grid-lines">
+        <div className="container-wide">
           <Reveal>
-            <form
-              className="bg-white border border-[color:var(--border)] rounded-xl p-8 space-y-6 shadow-xs"
-              onSubmit={handleSubmit}
-            >
-              <h2 className="text-xl font-serif border-b border-[color:var(--border)] pb-4 font-semibold text-[color:var(--ink)]">
-                Consultation Request Form
-              </h2>
-              
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field 
-                  label="Name" 
-                  name="name" 
-                  placeholder="Dr. Jane Doe" 
-                  required 
-                  value={name} 
-                  onChange={(e) => setName(e.target.value)} 
-                  icon={User}
-                />
-                <Field 
-                  label="Institution" 
-                  name="institution" 
-                  placeholder="University / Company" 
-                  required 
-                  value={institution} 
-                  onChange={(e) => setInstitution(e.target.value)} 
-                  icon={Building2}
-                />
+            <div className="grid lg:grid-cols-12 gap-8 items-end pb-10">
+              <div className="lg:col-span-7">
+                <p className="label text-[color:var(--cyan)]">Consultation Request</p>
+                <h2 className="mt-6 display display-md">Tell us the question.</h2>
               </div>
+              <p className="lg:col-span-5 font-sans text-[15px] leading-[1.6] text-[color:var(--text-body)]">
+                Fields marked with an asterisk are required. Submitting opens WhatsApp with your
+                details pre-filled — you still press send.
+              </p>
+            </div>
+          </Reveal>
 
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field 
-                  label="Email" 
-                  name="email" 
-                  type="email" 
-                  placeholder="you@institution.edu" 
-                  required 
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)} 
-                  icon={Mail}
+          <Reveal>
+            <form onSubmit={handleSubmit} className="border-2 border-[color:var(--ink)] bg-white">
+              <div className="grid sm:grid-cols-2">
+                <Field
+                  label="Name"
+                  name="name"
+                  placeholder="Dr. Jane Doe"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="border-b-2 sm:border-r-2 border-[color:var(--ink)]"
                 />
-                <Field 
-                  label="Phone (optional)" 
-                  name="phone" 
-                  placeholder="+91 99999 99999" 
-                  value={phone} 
-                  onChange={(e) => setPhone(e.target.value)} 
-                  icon={Phone}
+                <Field
+                  label="Institution"
+                  name="institution"
+                  placeholder="University / Company"
+                  required
+                  value={institution}
+                  onChange={(e) => setInstitution(e.target.value)}
+                  className="border-b-2 border-[color:var(--ink)]"
                 />
-              </div>
+                <Field
+                  label="Email"
+                  name="email"
+                  type="email"
+                  placeholder="you@institution.edu"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border-b-2 sm:border-r-2 border-[color:var(--ink)]"
+                />
+                <Field
+                  label="Phone (optional)"
+                  name="phone"
+                  placeholder="+91 99999 99999"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="border-b-2 border-[color:var(--ink)]"
+                />
 
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="font-mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--text-muted)] flex items-center gap-1.5">
-                    <Briefcase className="w-3.5 h-3.5 text-[color:var(--text-muted)]" />
-                    <span>Research Area</span>
-                    <span className="text-red-500 font-bold">*</span>
+                <div className="p-6 sm:p-7 border-b-2 sm:border-r-2 border-[color:var(--ink)]">
+                  <label
+                    htmlFor="area"
+                    className="label text-[10px] text-[color:var(--text-muted)]"
+                  >
+                    Research Area <span className="text-[color:var(--cyan)]">*</span>
                   </label>
                   <select
+                    id="area"
                     name="area"
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
                     required
-                    className="mt-2 w-full bg-white border border-[color:var(--border)] rounded-md p-3 text-[14px] text-[color:var(--ink)] focus:border-[color:var(--blue)] focus:ring-1 focus:ring-[color:var(--blue)] outline-none transition-all duration-200 appearance-none cursor-pointer"
+                    className="mt-3 w-full bg-transparent border-0 border-b-2 border-[color:var(--ink)] pb-2 font-sans text-[15px] text-[color:var(--ink)] outline-none focus:border-[color:var(--cyan)] transition-colors cursor-pointer appearance-none"
                     style={{
-                      backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E")`,
-                      backgroundPosition: "right 0.75rem center",
-                      backgroundSize: "1.25rem",
+                      backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%230b1526' stroke-linecap='round' stroke-width='2' d='m6 8 4 4 4-4'/%3E%3C/svg%3E")`,
+                      backgroundPosition: "right 0 center",
+                      backgroundSize: "1.15rem",
                       backgroundRepeat: "no-repeat",
-                      paddingRight: "2.5rem"
+                      paddingRight: "1.75rem",
                     }}
                   >
-                    <option value="Genomic & Clinical Data Analysis">Genomic & Clinical Data Analysis</option>
-                    <option value="Public Health & Epidemiological Modeling">Public Health & Epidemiological Modeling</option>
-                    <option value="Biostatistics & Experimental Design">Biostatistics & Experimental Design</option>
-                    <option value="Machine Learning & Predictive Modeling">Machine Learning & Predictive Modeling</option>
-                    <option value="Econometrics & Quantitative Finance">Econometrics & Quantitative Finance</option>
-                    <option value="General Data Science & Consulting">General Data Science & Consulting</option>
+                    {researchAreas.map((a) => (
+                      <option key={a} value={a}>
+                        {a}
+                      </option>
+                    ))}
                   </select>
                 </div>
-                
-                <Field 
-                  label="Preferred Date" 
-                  name="date" 
-                  type="date" 
-                  value={date} 
-                  onChange={(e) => setDate(e.target.value)} 
-                  icon={Calendar}
+
+                <Field
+                  label="Preferred Date"
+                  name="date"
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className="border-b-2 border-[color:var(--ink)]"
                 />
               </div>
 
-              <div>
-                <label className="font-mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--text-muted)] flex items-center gap-1.5">
-                  <MessageSquare className="w-3.5 h-3.5 text-[color:var(--text-muted)]" />
-                  <span>Message / Project Brief</span>
-                  <span className="text-red-500 font-bold">*</span>
+              <div className="p-6 sm:p-7 border-b-2 border-[color:var(--ink)]">
+                <label
+                  htmlFor="message"
+                  className="label text-[10px] text-[color:var(--text-muted)]"
+                >
+                  Message / Project Brief <span className="text-[color:var(--cyan)]">*</span>
                 </label>
                 <textarea
+                  id="message"
                   name="message"
-                  rows={5}
+                  rows={6}
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Tell us about your project, dataset, or question."
-                  className="mt-2 w-full bg-white border border-[color:var(--border)] rounded-md p-3 text-[15px] text-[color:var(--ink)] focus:border-[color:var(--blue)] focus:ring-1 focus:ring-[color:var(--blue)] outline-none transition-all duration-200 resize-y"
+                  className="mt-3 w-full bg-transparent border-0 border-b-2 border-[color:var(--ink)] pb-2 font-sans text-[15px] text-[color:var(--ink)] placeholder-[color:var(--text-muted)] outline-none focus:border-[color:var(--cyan)] transition-colors resize-y"
                 />
               </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isSubmitting}
-                className={`btn btn-ink btn-lg w-full flex items-center justify-center gap-2.5 transition-all duration-300 relative overflow-hidden select-none ${
-                  isSubmitting ? "opacity-90 bg-emerald-700 cursor-not-allowed" : "hover:bg-emerald-600"
-                }`}
+                className="btn btn-ink btn-lg w-full !border-0 disabled:opacity-70"
               >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    <span>Connecting to WhatsApp...</span>
-                  </>
-                ) : (
-                  <>
-                    <MessageCircle className="w-5 h-5 fill-current text-white" />
-                    <span>Send Inquiry via WhatsApp</span>
-                  </>
-                )}
+                {isSubmitting ? "Connecting to WhatsApp…" : "Send Inquiry via WhatsApp →"}
               </button>
             </form>
           </Reveal>
         </div>
-
-        {/* Contact details section at bottom */}
-        <Reveal className="mt-20 pt-10 border-t border-[color:var(--border)]">
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[color:var(--text-muted)]">Founder & Lead Architect</p>
-              <p className="mt-2 text-[17px] font-serif text-[color:var(--ink)] font-medium">
-                Anmol Jain
-              </p>
-            </div>
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[color:var(--text-muted)]">Email</p>
-              <a href="mailto:datasmithlabs@gmail.com" className="link-cyan mt-2 block text-[17px] font-serif font-medium">
-                datasmithlabs@gmail.com
-              </a>
-            </div>
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[color:var(--text-muted)]">Phone</p>
-              <a href="tel:+917017283915" className="link-cyan mt-2 block text-[17px] font-serif font-medium">
-                +91 7017 283 915
-              </a>
-            </div>
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[color:var(--text-muted)]">Office Hours</p>
-              <p className="mt-2 text-[14px] text-[color:var(--text-body)] flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[color:var(--text-muted)]" />
-                <span>Mon — Fri | 09:30 – 18:30 IST</span>
-              </p>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
-function Field({ 
-  label, 
-  name, 
-  type = "text", 
-  placeholder, 
-  required = false, 
-  value, 
-  onChange, 
-  icon: Icon 
-}: { 
-  label: string; 
-  name: string; 
-  type?: string; 
-  placeholder?: string; 
-  required?: boolean; 
-  value: string; 
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
-  icon?: any; 
+function Field({
+  label,
+  name,
+  type = "text",
+  placeholder,
+  required = false,
+  value,
+  onChange,
+  className = "",
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }) {
   return (
-    <div>
-      <label className="font-mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--text-muted)] flex items-center gap-1.5">
-        {Icon && <Icon className="w-3.5 h-3.5 text-[color:var(--text-muted)]" />}
-        <span>{label}</span>
-        {required && <span className="text-red-500 font-bold">*</span>}
+    <div className={`p-6 sm:p-7 ${className}`}>
+      <label htmlFor={name} className="label text-[10px] text-[color:var(--text-muted)]">
+        {label} {required && <span className="text-[color:var(--cyan)]">*</span>}
       </label>
       <input
+        id={name}
         type={type}
         name={name}
         placeholder={placeholder}
         required={required}
         value={value}
         onChange={onChange}
-        className="mt-2 w-full bg-white border border-[color:var(--border)] rounded-md p-3 text-[14px] text-[color:var(--ink)] focus:border-[color:var(--blue)] focus:ring-1 focus:ring-[color:var(--blue)] outline-none transition-all duration-200"
+        className="mt-3 w-full bg-transparent border-0 border-b-2 border-[color:var(--ink)] pb-2 font-sans text-[15px] text-[color:var(--ink)] placeholder-[color:var(--text-muted)] outline-none focus:border-[color:var(--cyan)] transition-colors"
       />
     </div>
   );
