@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "../components/site/Reveal";
+import { Canvas3D } from "../components/three/Canvas3D";
 import { toast } from "sonner";
 import {
   Sparkles,
@@ -224,13 +225,8 @@ function ProductsPage() {
     <div className="bg-[color:var(--off-white)] min-h-screen text-[color:var(--ink)]">
       {/* ───────────────── HERO SECTION ───────────────── */}
       <section className="relative pt-[140px] pb-24 overflow-hidden bg-[color:var(--navy)] text-white">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-[0.08]"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1400')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[color:var(--ink)]/40 to-[color:var(--ink)]" />
+        <Canvas3D variant="constellation" className="absolute inset-0" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[color:var(--navy)]/70 via-[color:var(--ink)]/55 to-[color:var(--ink)]" />
         
         <div className="container-wide relative z-10 max-w-[1200px]">
           <div className="grid lg:grid-cols-12 gap-12 items-center">

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "../components/site/Reveal";
+import { Canvas3D } from "../components/three/Canvas3D";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -47,8 +48,10 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[color:var(--navy)] text-white py-[120px]">
-        <div className="container-wide">
+      <section className="relative overflow-hidden bg-[color:var(--navy)] text-white py-[120px]">
+        <Canvas3D variant="wave" className="absolute inset-0" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--navy)] via-[color:var(--navy)]/70 to-transparent" />
+        <div className="container-wide relative z-10">
           <Reveal className="max-w-[720px]">
             <p className="eyebrow-muted">Our Story</p>
             <h2 className="mt-5 font-serif italic text-[clamp(28px,3.6vw,40px)] leading-[1.15] text-white">

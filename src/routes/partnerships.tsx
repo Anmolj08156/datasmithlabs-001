@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "../components/site/Reveal";
+import { Canvas3D } from "../components/three/Canvas3D";
 import {
   ArrowUpRight,
   Building2,
@@ -129,13 +130,11 @@ function PartnershipsPage() {
     <>
       {/* ───────────────── HERO ───────────────── */}
       <section className="relative pt-[140px] pb-20 sm:pb-24 overflow-hidden bg-[color:var(--navy)] text-white">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-[0.09]"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[color:var(--ink)]/40 to-[color:var(--ink)]" />
+        {/* One orbiting ring per partner. */}
+        <Canvas3D variant="orbit" className="absolute inset-0" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[color:var(--navy)]/45 via-[color:var(--ink)]/30 to-[color:var(--ink)]" />
+        {/* Keeps the headline crisp where it crosses the orbit rings. */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--ink)]/75 via-[color:var(--ink)]/10 to-transparent" />
 
         <div className="container-wide relative z-10">
           <div className="stagger max-w-[720px]">

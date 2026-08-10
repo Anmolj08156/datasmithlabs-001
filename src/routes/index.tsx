@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Reveal, CountUp } from "../components/site/Reveal";
+import { Canvas3D } from "../components/three/Canvas3D";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,22 +56,23 @@ function Index() {
   return (
     <>
       {/* ───────────────── HERO ───────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-[color:var(--ink)]">
+        <Canvas3D variant="constellation" className="absolute inset-0" />
+        {/* Scrim: opaque enough on the left for the headline, open on the right
+            so the constellation stays the visual subject. */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=1600')`,
-          }}
-        />
-        <div
-          className="absolute inset-0"
+          className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(105deg, rgba(11,21,38,0.88) 45%, rgba(11,21,38,0.3) 100%)",
+              "linear-gradient(105deg, rgba(11,21,38,0.94) 32%, rgba(11,21,38,0.28) 66%, rgba(11,21,38,0.45) 100%)",
           }}
         />
+        <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none bg-gradient-to-t from-[color:var(--ink)] to-transparent" />
 
-        <div className="container-wide relative z-10 pt-32 sm:pt-40 pb-20 sm:pb-32 max-w-[1240px]">
+        {/* w-full: as a flex item this div would otherwise shrink to its content
+            width, pulling the hero copy out of line with the nav and the
+            sections below it. */}
+        <div className="container-wide relative z-10 w-full pt-32 sm:pt-40 pb-20 sm:pb-32">
           <div className="stagger max-w-[640px]">
             <p className="eyebrow">Research · Intelligence · Innovation</p>
             <h1 className="mt-6 text-white font-serif italic font-light leading-[1.05] text-[clamp(36px,7vw,72px)]">
@@ -186,15 +188,19 @@ function Index() {
           </Reveal>
 
           <Reveal className="lg:col-span-5">
-            <div
-              className="relative h-full min-h-[300px] sm:min-h-[420px] rounded-lg overflow-hidden"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(15,35,71,0.15), rgba(15,35,71,0.15)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
+            <div className="relative h-full min-h-[300px] sm:min-h-[420px] rounded-lg overflow-hidden bg-[color:var(--ink)] border border-[color:var(--border-dark)]">
+              <Canvas3D variant="wave" className="absolute inset-0" trackPointer={false} />
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[color:var(--ink)] via-transparent to-[color:var(--ink)]/40" />
+              <div className="absolute bottom-6 left-6 right-6 pointer-events-none">
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[color:var(--cyan)]">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-[color:var(--cyan)] mr-2 align-middle animate-pulse" />
+                  Live surface
+                </p>
+                <p className="mt-2 font-serif italic text-[18px] text-white/85 leading-snug">
+                  Every dataset has a shape. We find it.
+                </p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
