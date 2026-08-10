@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Nav } from "../components/site/Nav";
 import { Footer } from "../components/site/Footer";
+import { ScrollProgress } from "../components/site/Reveal";
 import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
@@ -81,10 +82,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "DataSmith Research Labs — Research. Intelligence. Innovation." },
-      { name: "description", content: "DataSmith Research Labs transforms data into discovery — AI, data science, research consulting, and corporate training for serious institutions." },
+      {
+        name: "description",
+        content:
+          "DataSmith Research Labs transforms data into discovery — AI, data science, research consulting, and corporate training for serious institutions.",
+      },
       { name: "author", content: "DataSmith Research Labs" },
       { property: "og:title", content: "DataSmith Research Labs" },
-      { property: "og:description", content: "Transforming data into discovery. AI, data science, and research consulting for serious institutions." },
+      {
+        property: "og:description",
+        content:
+          "Transforming data into discovery. AI, data science, and research consulting for serious institutions.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@DataSmithLabs" },
@@ -101,7 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap",
       },
       {
         rel: "stylesheet",
@@ -134,6 +143,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ScrollProgress />
       <Nav />
       <main className="min-h-screen">
         <Outlet />
