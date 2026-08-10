@@ -1,42 +1,108 @@
 import { Link } from "@tanstack/react-router";
 
+const sitemap = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/products", label: "Products" },
+  { to: "/partnerships", label: "Partners" },
+  { to: "/contact", label: "Contact" },
+];
+
+const legal = [
+  { to: "/privacy", label: "Privacy" },
+  { to: "/terms", label: "Terms" },
+  { to: "/disclaimer", label: "Disclaimer" },
+  { to: "/refund", label: "Refund" },
+];
+
 export function Footer() {
   return (
     <footer className="bg-[color:var(--ink)] text-white">
-      <div className="container-wide py-16">
-        <div className="grid md:grid-cols-3 items-center gap-8 pb-10 border-b border-[color:var(--border-dark)]">
-          <Link to="/" className="flex items-center justify-center md:justify-start gap-3 flex-nowrap shrink-0">
-            <span className="font-serif text-[22px] font-medium whitespace-nowrap">DataSmith</span>
-            <span className="h-4 w-px bg-white/20 shrink-0" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/55 whitespace-nowrap">
-              Research Labs
-            </span>
-          </Link>
-
-          <p className="font-serif italic text-[20px] text-white/85 text-center">
-            Research. Intelligence. Innovation.
+      {/* Oversized wordmark band */}
+      <div className="border-b-2 border-white/20 overflow-hidden">
+        <div className="container-wide py-10 sm:py-14">
+          <p className="display text-[clamp(48px,15vw,220px)] leading-[0.8] text-white/95">
+            DataSmith
           </p>
+        </div>
+      </div>
 
+      <div className="container-wide grid md:grid-cols-12 gap-y-10 py-14">
+        <div className="md:col-span-5">
+          <p className="label text-[10px] text-white/40">Research · Intelligence · Innovation</p>
+          <p className="mt-5 font-sans text-[15px] leading-[1.6] text-white/70 max-w-[320px]">
+            Transforming data into discovery for institutions that take their work
+            seriously.
+          </p>
           <a
             href="https://www.linkedin.com/company/datasmith-labs"
             target="_blank"
             rel="noreferrer"
-            className="font-sans text-[14px] text-white/70 hover:text-[color:var(--cyan)] text-center md:text-right w-full md:w-auto md:justify-self-end"
+            className="mt-7 btn btn-outline-light btn-sm"
           >
             LinkedIn →
           </a>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-8">
-          <div className="flex flex-wrap gap-6 text-[13px] text-white/45">
-            <Link to="/privacy" className="hover:text-white">Privacy</Link>
-            <Link to="/terms" className="hover:text-white">Terms</Link>
-            <Link to="/disclaimer" className="hover:text-white">Disclaimer</Link>
-            <Link to="/refund" className="hover:text-white">Refund</Link>
-          </div>
-          <p className="font-mono text-[11px] text-white/30">
-            © 2025 DataSmith Research Labs
-          </p>
+        <nav className="md:col-span-3">
+          <p className="label text-[10px] text-white/40">Sitemap</p>
+          <ul className="mt-5 space-y-2.5">
+            {sitemap.map((l) => (
+              <li key={l.to}>
+                <Link
+                  to={l.to}
+                  className="font-sans text-[15px] text-white/85 hover:text-[color:var(--cyan)] transition-colors"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav className="md:col-span-2">
+          <p className="label text-[10px] text-white/40">Legal</p>
+          <ul className="mt-5 space-y-2.5">
+            {legal.map((l) => (
+              <li key={l.to}>
+                <Link
+                  to={l.to}
+                  className="font-sans text-[15px] text-white/85 hover:text-[color:var(--cyan)] transition-colors"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="md:col-span-2">
+          <p className="label text-[10px] text-white/40">Contact</p>
+          <ul className="mt-5 space-y-2.5 font-sans text-[15px]">
+            <li>
+              <a
+                href="mailto:datasmithlabs@gmail.com"
+                className="text-white/85 hover:text-[color:var(--cyan)] transition-colors break-all"
+              >
+                datasmithlabs@gmail.com
+              </a>
+            </li>
+            <li>
+              <a
+                href="tel:+917017283915"
+                className="text-white/85 hover:text-[color:var(--cyan)] transition-colors"
+              >
+                +91 7017 283 915
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t-2 border-white/20">
+        <div className="container-wide flex flex-wrap items-center justify-between gap-3 py-5">
+          <p className="label text-[10px] text-white/35">© 2025 DataSmith Research Labs</p>
+          <p className="label text-[10px] text-white/35">Built in India</p>
         </div>
       </div>
     </footer>
