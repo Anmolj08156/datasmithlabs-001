@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home" },
@@ -16,7 +16,7 @@ export function Nav() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -35,35 +35,40 @@ export function Nav() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 pt-3 px-3 sm:pt-4 sm:px-5">
-        <nav
-          className={`mx-auto max-w-[1180px] flex items-center justify-between h-[60px] pl-5 pr-2 rounded-full transition-all duration-400 ${
-            scrolled
-              ? "bg-white/85 backdrop-blur-xl border border-[color:var(--border)] shadow-[0_8px_30px_-12px_rgba(11,21,38,0.18)]"
-              : "bg-white/85 backdrop-blur-md border border-white/60"
-          }`}
-        >
-          <Link to="/" className="flex items-center gap-2.5 group shrink-0">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+          scrolled
+            ? "bg-[color:var(--void)]/85 backdrop-blur-xl border-b border-[color:var(--hairline)]"
+            : "bg-transparent"
+        }`}
+      >
+        <nav className="container-wide flex items-center justify-between h-[72px]">
+          <Link to="/" className="flex items-center gap-3 group shrink-0 relative z-50">
             <img
               src="/logo-mark.png"
               alt=""
-              width={32}
-              height={32}
-              className="w-8 h-8 rounded-[9px] transition-transform duration-400 group-hover:scale-105"
+              width={34}
+              height={34}
+              className="w-[34px] h-[34px] rounded-[10px] transition-transform duration-500 group-hover:scale-105"
             />
-            <span className="font-display font-semibold text-[15px] sm:text-[16px] tracking-[-0.02em] text-[color:var(--ink)] whitespace-nowrap">
-              DataSmith{" "}
-              <span className="font-medium text-[color:var(--text-body)]">Research Labs</span>
+            <span className="leading-[1.15]">
+              <span className="block font-display font-medium text-[15px] tracking-[-0.02em] text-white">
+                DataSmith
+              </span>
+              <span className="block font-mono text-[8.5px] uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
+                Research Labs
+              </span>
             </span>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-1">
+          {/* Centred link cluster, as in the reference layout. */}
+          <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                className="relative px-4 py-2 rounded-full font-sans text-[14px] font-medium text-[color:var(--text-body)] hover:text-[color:var(--ink)] hover:bg-[color:var(--off-white)] transition-colors duration-200"
-                activeProps={{ className: "text-[color:var(--ink)] bg-[color:var(--off-white)]" }}
+                className="px-4 py-2 rounded-full font-sans text-[13.5px] font-medium text-[color:var(--text-body)] hover:text-white hover:bg-white/5 transition-colors duration-200"
+                activeProps={{ className: "text-white bg-white/[0.07]" }}
                 activeOptions={{ exact: l.to === "/" }}
               >
                 {l.label}
@@ -72,12 +77,12 @@ export function Nav() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Link to="/contact" className="hidden sm:inline-flex btn btn-ink btn-sm">
-              Book a call
+            <Link to="/contact" className="hidden sm:inline-flex btn btn-outline btn-sm">
+              Let's Talk <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center text-[color:var(--ink)] hover:bg-[color:var(--off-white)] transition-colors relative z-50"
+              className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-white/8 transition-colors relative z-50"
               aria-label="Toggle navigation menu"
               aria-expanded={isOpen}
             >
@@ -87,14 +92,14 @@ export function Nav() {
         </nav>
       </header>
 
-      {/* Mobile sheet */}
       <div
         className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="absolute inset-0 bg-[color:var(--ink)]">
-          <div className="aurora opacity-60" />
+        <div className="absolute inset-0 bg-[color:var(--void)]">
+          <div className="glow glow-blue w-[420px] h-[420px] -top-24 -right-24 opacity-60" />
+          <div className="absolute inset-0 grid-fade opacity-50" />
         </div>
 
         <div className="relative h-full flex flex-col justify-center container-wide">
@@ -102,8 +107,8 @@ export function Nav() {
             <Link
               key={l.to}
               to={l.to}
-              className="py-3.5 border-b border-white/10 font-display font-semibold text-[28px] tracking-[-0.02em] text-white hover:text-[color:var(--cyan)] transition-colors"
-              activeProps={{ className: "text-[color:var(--cyan)]" }}
+              className="py-3.5 border-b border-[color:var(--hairline)] font-display font-medium text-[27px] tracking-[-0.03em] text-white hover:text-[color:var(--blue-bright)] transition-colors"
+              activeProps={{ className: "text-[color:var(--blue-bright)]" }}
               activeOptions={{ exact: l.to === "/" }}
               style={{
                 transitionDelay: isOpen ? `${90 + i * 55}ms` : "0ms",
@@ -118,10 +123,10 @@ export function Nav() {
           ))}
 
           <div className="mt-9 flex flex-col gap-3">
-            <Link to="/contact" className="btn btn-cyan btn-lg w-full">
-              Book a free consultation
+            <Link to="/contact" className="btn btn-primary btn-lg w-full">
+              Schedule a consultation <ArrowRight className="w-4 h-4" />
             </Link>
-            <div className="flex flex-col gap-1.5 mt-2 font-mono text-[12px] text-white/50">
+            <div className="flex flex-col gap-1.5 mt-2 font-mono text-[12px] text-[color:var(--text-muted)]">
               <a
                 href="mailto:datasmithlabs@gmail.com"
                 className="hover:text-white transition-colors"

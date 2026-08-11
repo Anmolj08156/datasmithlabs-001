@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal, RevealGroup, SplitText } from "../components/site/Reveal";
+import { SectionRail } from "../components/site/SectionRail";
 import { Canvas3D } from "../components/three/Canvas3D";
 import { ArrowRight, GraduationCap } from "lucide-react";
 
@@ -34,21 +35,39 @@ const team = [
   },
 ];
 
+const values = [
+  {
+    title: "Scientific method",
+    desc: "Every engagement is treated as a research project — hypotheses, controls, peer review, reproducible code.",
+  },
+  {
+    title: "Production discipline",
+    desc: "Research that cannot ship is not finished. We hand off production-grade software, not notebooks.",
+  },
+  {
+    title: "Statistical honesty",
+    desc: "We report what the data supports, including when the answer is inconvenient or the effect is small.",
+  },
+];
+
 function AboutPage() {
   return (
     <>
-      {/* ───────── HERO ───────── */}
-      <section className="relative bg-[color:var(--ink)] text-white overflow-hidden">
-        <div className="aurora opacity-70" />
-        <div className="absolute inset-0 dot-grid-dark opacity-40 pointer-events-none" />
+      {/* ═══════ 01 · ABOUT ═══════ */}
+      <section className="relative min-h-[72vh] flex items-center overflow-hidden bg-[color:var(--void)]">
+        <div className="glow glow-blue w-[620px] h-[620px] -top-40 right-0 opacity-35" />
+        <div className="absolute inset-0 grid-fade opacity-40 pointer-events-none" />
+        <SectionRail num="01" label="About" />
 
-        <div className="container-wide relative z-10 pt-32 pb-20 sm:pt-40 sm:pb-24">
-          <div className="stagger max-w-[720px]">
-            <p className="eyebrow">About</p>
-            <h1 className="mt-5 h1">
-              A research lab <span className="text-gradient">disguised</span> as a company.
+        <div className="container-wide relative z-10 pt-32 pb-20">
+          <div className="stagger max-w-[640px]">
+            <p className="eyebrow">About Us</p>
+            <h1 className="mt-6 h1">
+              A research lab
+              <br />
+              disguised as a company.
             </h1>
-            <p className="mt-7 font-sans text-[17px] leading-[1.6] text-white/65 max-w-[560px]">
+            <p className="mt-7 body-text text-[16px] max-w-[470px]">
               DataSmith Research Labs was founded by researchers who got tired of watching good
               science die in PDFs. We build the systems, the partnerships, and the training programs
               that move research from the page into production.
@@ -57,18 +76,19 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* ───────── OUR STORY ───────── */}
-      <section className="relative bg-[color:var(--navy)] text-white py-20 sm:py-28 overflow-hidden">
-        <Canvas3D variant="wave" className="absolute inset-0 opacity-80" />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--navy)] via-[color:var(--navy)]/75 to-transparent" />
+      {/* ═══════ 02 · STORY ═══════ */}
+      <section className="section relative min-h-[70vh] flex items-center bg-[color:var(--ink)]">
+        <Canvas3D variant="terrain" className="absolute inset-0 opacity-90" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--ink)] via-[color:var(--ink)]/65 to-transparent" />
+        <SectionRail num="02" label="Story" />
 
-        <div className="container-wide relative z-10">
-          <Reveal className="max-w-[640px]" direction="left">
-            <p className="eyebrow">Our story</p>
-            <h2 className="mt-4 h2">
+        <div className="container-wide relative z-10 py-24">
+          <Reveal className="max-w-[540px]" direction="left">
+            <p className="eyebrow">Our Story</p>
+            <h2 className="mt-5 h2">
               <SplitText text="Built at the seam between academia and industry." />
             </h2>
-            <div className="mt-7 space-y-5 font-sans text-[15px] sm:text-[16px] leading-[1.7] text-white/70">
+            <div className="mt-7 space-y-5 body-text text-[15px] max-w-[440px]">
               <p>
                 The lab grew out of a simple frustration: most "AI consultancies" don't read papers,
                 and most research labs don't ship. We sit deliberately in between.
@@ -83,34 +103,63 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* ───────── TEAM ───────── */}
-      <section className="bg-white py-20 sm:py-28">
-        <div className="container-wide">
+      {/* ═══════ 03 · VALUES ═══════ */}
+      <section className="section relative bg-[color:var(--void)] py-24">
+        <div className="glow glow-cyan w-[480px] h-[480px] top-0 left-1/4 opacity-25" />
+        <SectionRail num="03" label="Values" />
+
+        <div className="container-wide relative z-10">
           <Reveal>
-            <p className="eyebrow">The team</p>
-            <h2 className="mt-4 h2 max-w-[540px]">
-              <SplitText text="Researchers, engineers, and educators working in one room." />
+            <p className="eyebrow">How We Work</p>
+            <h2 className="mt-5 h2 max-w-[520px]">
+              <SplitText text="Three commitments we do not trade away." />
             </h2>
           </Reveal>
 
-          <RevealGroup className="mt-12 grid sm:grid-cols-2 gap-5 max-w-[820px]" step={110}>
+          <RevealGroup className="mt-14 grid md:grid-cols-3 gap-5" step={110}>
+            {values.map((v, i) => (
+              <div key={v.title} className="card hover-lift p-7 h-full">
+                <span className="font-mono text-[11px] text-[color:var(--blue-bright)]">
+                  0{i + 1}
+                </span>
+                <h3 className="mt-5 h3">{v.title}</h3>
+                <p className="mt-3 body-text text-[13.5px]">{v.desc}</p>
+              </div>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* ═══════ 04 · TEAM ═══════ */}
+      <section className="section relative bg-[color:var(--ink)] py-24">
+        <div className="absolute inset-0 grid-fade opacity-30 pointer-events-none" />
+        <SectionRail num="04" label="Team" />
+
+        <div className="container-wide relative z-10">
+          <Reveal>
+            <p className="eyebrow">The Team</p>
+            <h2 className="mt-5 h2 max-w-[520px]">
+              <SplitText text="Researchers, engineers, and educators in one room." />
+            </h2>
+          </Reveal>
+
+          <RevealGroup className="mt-14 grid sm:grid-cols-2 gap-5 max-w-[780px]" step={130}>
             {team.map((m) => (
-              <div key={m.name} className="card p-7 hover-lift group">
+              <div key={m.name} className="card hover-lift p-7 group">
                 <div className="flex items-center gap-4">
-                  <span className="w-14 h-14 rounded-2xl bg-[color:var(--ink)] flex items-center justify-center font-display font-semibold text-[17px] text-[color:var(--cyan)] transition-transform duration-400 group-hover:scale-105">
+                  <span className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[color:var(--blue)] to-[#1b4bd0] flex items-center justify-center font-display font-medium text-[16px] text-white transition-transform duration-500 group-hover:scale-105">
                     {m.initials}
                   </span>
                   <div>
                     <h3 className="h3">{m.name}</h3>
-                    <p className="mt-1 font-sans text-[14px] text-[color:var(--text-body)]">
+                    <p className="mt-1 font-sans text-[13.5px] text-[color:var(--text-body)]">
                       {m.role}
                     </p>
                   </div>
                 </div>
-
-                <div className="mt-6 pt-5 border-t border-[color:var(--border)] flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 text-[color:var(--cyan)]" />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-[color:var(--text-muted)]">
+                <div className="mt-6 pt-5 border-t border-[color:var(--hairline)] flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-[color:var(--blue-bright)]" />
+                  <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-[color:var(--text-muted)]">
                     {m.education}
                   </span>
                 </div>
@@ -120,24 +169,25 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* ───────── CTA ───────── */}
-      <section className="bg-[color:var(--off-white)] border-t border-[color:var(--border)] py-20 sm:py-24">
-        <div className="container-wide">
-          <Reveal direction="scale">
-            <div className="relative rounded-3xl overflow-hidden bg-[color:var(--ink)] text-white px-7 py-12 sm:px-12 sm:py-16 grid lg:grid-cols-12 gap-8 items-center">
-              <div className="aurora opacity-60" />
-              <div className="relative lg:col-span-8">
-                <p className="eyebrow">Work with us</p>
-                <h2 className="mt-4 h2">Bring us a hard question.</h2>
-              </div>
-              <div className="relative lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
-                <Link to="/contact" className="btn btn-cyan">
-                  Book a consultation <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link to="/partnerships" className="btn btn-outline-light">
-                  See partners
-                </Link>
-              </div>
+      {/* ═══════ 05 · CTA ═══════ */}
+      <section className="section relative min-h-[62vh] flex items-center bg-[color:var(--void)] overflow-hidden">
+        <Canvas3D variant="tunnel" className="absolute inset-0 opacity-85" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--void)] via-[color:var(--void)]/72 to-transparent" />
+        <SectionRail num="05" label="Lets Talk" />
+
+        <div className="container-wide relative z-10 py-24">
+          <Reveal className="max-w-[520px]" direction="left">
+            <p className="eyebrow">Work With Us</p>
+            <h2 className="mt-5 h2">
+              <SplitText text="Bring us a hard question." />
+            </h2>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link to="/contact" className="btn btn-primary">
+                Schedule a Consultation <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link to="/partnerships" className="btn btn-outline">
+                See Our Partners
+              </Link>
             </div>
           </Reveal>
         </div>

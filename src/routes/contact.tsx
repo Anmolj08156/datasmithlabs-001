@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal, RevealGroup, SplitText } from "../components/site/Reveal";
+import { SectionRail } from "../components/site/SectionRail";
+import { Canvas3D } from "../components/three/Canvas3D";
 import { toast } from "sonner";
 import { Clock, Mail, MessageCircle, Phone, User } from "lucide-react";
 
@@ -101,45 +103,49 @@ ${message || "—"}`;
 
   return (
     <>
-      {/* ───────── HERO ───────── */}
-      <section className="relative bg-[color:var(--ink)] text-white overflow-hidden">
-        <div className="aurora opacity-70" />
-        <div className="absolute inset-0 dot-grid-dark opacity-40 pointer-events-none" />
+      {/* ═══════ 01 · HERO ═══════ */}
+      <section className="relative min-h-[62vh] flex items-center overflow-hidden bg-[color:var(--void)]">
+        <Canvas3D variant="globe" className="absolute inset-0 opacity-75" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--void)] via-[color:var(--void)]/72 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-[color:var(--void)] to-transparent" />
+        <SectionRail num="01" label="Contact" />
 
-        <div className="container-wide relative z-10 pt-32 pb-16 sm:pt-40 sm:pb-20">
-          <div className="stagger max-w-[680px]">
-            <p className="eyebrow">Get in touch</p>
-            <h1 className="mt-5 h1">
-              Let's build something <span className="text-gradient">meaningful</span>.
+        <div className="container-wide relative z-10 pt-32 pb-16">
+          <div className="stagger max-w-[600px]">
+            <p className="eyebrow">Get in Touch</p>
+            <h1 className="mt-6 h1">
+              Let's build something
+              <br />
+              meaningful.
             </h1>
-            <p className="mt-7 font-sans text-[17px] leading-[1.6] text-white/65 max-w-[520px]">
+            <p className="mt-7 body-text text-[16px] max-w-[440px]">
               Send us a note about your institution, your data, or the research question you're
               trying to answer.
             </p>
           </div>
 
           <RevealGroup
-            className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
-            step={90}
+            className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+            step={100}
             direction="scale"
           >
             {details.map((d) => {
               const Icon = d.icon;
               return (
-                <div key={d.label} className="card-dark p-5 hover-lift">
-                  <Icon className="w-4 h-4 text-[color:var(--cyan)]" />
-                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-white/40">
+                <div key={d.label} className="card hover-lift p-5">
+                  <Icon className="w-4 h-4 text-[color:var(--blue-bright)]" />
+                  <p className="mt-4 font-mono text-[9.5px] uppercase tracking-[0.16em] text-[color:var(--text-muted)]">
                     {d.label}
                   </p>
                   {d.href ? (
                     <a
                       href={d.href}
-                      className="mt-2 block font-sans text-[15px] text-white link-underline break-all"
+                      className="mt-2 block font-sans text-[14.5px] text-white link-underline"
                     >
                       {d.value}
                     </a>
                   ) : (
-                    <p className="mt-2 font-sans text-[15px] text-white">{d.value}</p>
+                    <p className="mt-2 font-sans text-[14.5px] text-white">{d.value}</p>
                   )}
                 </div>
               );
@@ -148,15 +154,18 @@ ${message || "—"}`;
         </div>
       </section>
 
-      {/* ───────── FORM ───────── */}
-      <section className="bg-[color:var(--off-white)] border-t border-[color:var(--border)] py-16 sm:py-24">
-        <div className="container-wide max-w-[860px]">
-          <Reveal className="text-center">
-            <p className="eyebrow">Consultation request</p>
-            <h2 className="mt-4 h2">
+      {/* ═══════ 02 · FORM ═══════ */}
+      <section className="section relative bg-[color:var(--ink)] py-20">
+        <div className="glow glow-blue w-[520px] h-[520px] top-0 right-0 opacity-20" />
+        <SectionRail num="02" label="Brief" />
+
+        <div className="container-wide relative z-10 max-w-[880px]">
+          <Reveal>
+            <p className="eyebrow">Consultation Request</p>
+            <h2 className="mt-5 h2">
               <SplitText text="Tell us the question." />
             </h2>
-            <p className="mt-4 font-sans text-[15px] leading-[1.6] text-[color:var(--text-body)] max-w-[480px] mx-auto">
+            <p className="mt-5 body-text text-[15px] max-w-[500px]">
               Submitting opens WhatsApp with your details pre-filled — you still press send.
             </p>
           </Reveal>
@@ -203,11 +212,8 @@ ${message || "—"}`;
 
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label
-                    htmlFor="area"
-                    className="label text-[10px] text-[color:var(--text-muted)]"
-                  >
-                    Research area <span className="text-[color:var(--cyan)]">*</span>
+                  <label htmlFor="area" className="label text-[color:var(--text-muted)]">
+                    Research area <span className="text-[color:var(--blue-bright)]">*</span>
                   </label>
                   <select
                     id="area"
@@ -215,9 +221,9 @@ ${message || "—"}`;
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
                     required
-                    className="mt-2.5 w-full h-[46px] px-4 rounded-xl bg-white border border-[color:var(--border)] font-sans text-[14px] text-[color:var(--ink)] outline-none focus:border-[color:var(--cyan)] focus:ring-2 focus:ring-[color:var(--cyan)]/20 transition-all cursor-pointer appearance-none"
+                    className="mt-2.5 w-full h-[46px] px-4 rounded-xl bg-white/5 border border-[color:var(--hairline-strong)] font-sans text-[14px] text-white outline-none focus:border-[color:var(--blue)] transition-all cursor-pointer appearance-none"
                     style={{
-                      backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%238b93a3' stroke-linecap='round' stroke-width='1.6' d='m6 8 4 4 4-4'/%3E%3C/svg%3E")`,
+                      backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%237e8aa3' stroke-linecap='round' stroke-width='1.6' d='m6 8 4 4 4-4'/%3E%3C/svg%3E")`,
                       backgroundPosition: "right 0.9rem center",
                       backgroundSize: "1.15rem",
                       backgroundRepeat: "no-repeat",
@@ -225,7 +231,7 @@ ${message || "—"}`;
                     }}
                   >
                     {researchAreas.map((a) => (
-                      <option key={a} value={a}>
+                      <option key={a} value={a} className="bg-[color:var(--ink)] text-white">
                         {a}
                       </option>
                     ))}
@@ -242,11 +248,8 @@ ${message || "—"}`;
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="label text-[10px] text-[color:var(--text-muted)]"
-                >
-                  Message / project brief <span className="text-[color:var(--cyan)]">*</span>
+                <label htmlFor="message" className="label text-[color:var(--text-muted)]">
+                  Message / project brief <span className="text-[color:var(--blue-bright)]">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -256,14 +259,14 @@ ${message || "—"}`;
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Tell us about your project, dataset, or question."
-                  className="mt-2.5 w-full px-4 py-3 rounded-xl bg-white border border-[color:var(--border)] font-sans text-[14px] text-[color:var(--ink)] placeholder-[color:var(--text-muted)] outline-none focus:border-[color:var(--cyan)] focus:ring-2 focus:ring-[color:var(--cyan)]/20 transition-all resize-y"
+                  className="mt-2.5 w-full px-4 py-3 rounded-xl bg-white/5 border border-[color:var(--hairline-strong)] font-sans text-[14px] text-white placeholder-[color:var(--text-muted)] outline-none focus:border-[color:var(--blue)] transition-all resize-y"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn btn-ink btn-lg w-full disabled:opacity-70"
+                className="btn btn-primary btn-lg w-full disabled:opacity-70"
               >
                 {isSubmitting ? (
                   "Connecting to WhatsApp…"
@@ -301,8 +304,8 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="label text-[10px] text-[color:var(--text-muted)]">
-        {label} {required && <span className="text-[color:var(--cyan)]">*</span>}
+      <label htmlFor={name} className="label text-[color:var(--text-muted)]">
+        {label} {required && <span className="text-[color:var(--blue-bright)]">*</span>}
       </label>
       <input
         id={name}
@@ -312,7 +315,7 @@ function Field({
         required={required}
         value={value}
         onChange={onChange}
-        className="mt-2.5 w-full h-[46px] px-4 rounded-xl bg-white border border-[color:var(--border)] font-sans text-[14px] text-[color:var(--ink)] placeholder-[color:var(--text-muted)] outline-none focus:border-[color:var(--cyan)] focus:ring-2 focus:ring-[color:var(--cyan)]/20 transition-all"
+        className="mt-2.5 w-full h-[46px] px-4 rounded-xl bg-white/5 border border-[color:var(--hairline-strong)] font-sans text-[14px] text-white placeholder-[color:var(--text-muted)] outline-none focus:border-[color:var(--blue)] transition-all [color-scheme:dark]"
       />
     </div>
   );

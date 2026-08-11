@@ -8,6 +8,8 @@ type Canvas3DProps = {
   quality?: number;
   /** Set false for scenes inside a card, where window-wide tracking feels wrong. */
   trackPointer?: boolean;
+  /** Scene-specific selector — picks which artifact shape to build, etc. */
+  option?: number;
 };
 
 const MAX_PIXEL_RATIO = 1.75;
@@ -38,6 +40,7 @@ export function Canvas3D({
   className = "",
   quality = 1,
   trackPointer = true,
+  option = 0,
 }: Canvas3DProps) {
   const hostRef = useRef<HTMLDivElement>(null);
 
@@ -93,6 +96,7 @@ export function Canvas3D({
         camera,
         quality: Math.min(1, deviceQuality() * quality),
         pixelRatio,
+        option,
       });
 
       const pointer = { x: 0, y: 0 };
@@ -159,7 +163,7 @@ export function Canvas3D({
       cancelled = true;
       cleanup?.();
     };
-  }, [variant, quality, trackPointer]);
+  }, [variant, quality, trackPointer, option]);
 
   return <div ref={hostRef} aria-hidden="true" className={className} />;
 }
