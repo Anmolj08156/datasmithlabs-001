@@ -21,23 +21,28 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+/** `hash` deep-links each card to its own card on the services page. */
 const solutions = [
   {
+    hash: "ai-ml",
     title: "AI & Machine Learning",
     desc: "Intelligent systems that learn, adapt and scale.",
     tags: ["Neural Networks", "MLOps"],
   },
   {
+    hash: "data-science",
     title: "Data Science & Analytics",
     desc: "Transforming data into actionable insights.",
     tags: ["Forecasting", "Dashboards"],
   },
   {
+    hash: "research",
     title: "Research & Innovation",
     desc: "Solving complex problems through rigorous research.",
     tags: ["Applied Research", "Publications"],
   },
   {
+    hash: "training",
     title: "Training & Workshops",
     desc: "Building capability through knowledge and hands-on experience.",
     tags: ["Certifications", "Faculty Dev"],
@@ -197,7 +202,11 @@ function Index() {
                   />
                 </div>
 
-                <div className="card product-card p-6 flex-1 flex flex-col">
+                <Link
+                  to="/products"
+                  hash={s.hash}
+                  className="card product-card p-6 flex-1 flex flex-col"
+                >
                   <h3 className="h3">{s.title}</h3>
                   <p className="mt-3 body-text text-[13.5px] flex-1">{s.desc}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
@@ -207,14 +216,11 @@ function Index() {
                       </span>
                     ))}
                   </div>
-                  <Link
-                    to="/products"
-                    className="mt-6 inline-flex items-center gap-2 text-[color:var(--blue-bright)]"
-                    aria-label={`More about ${s.title}`}
-                  >
+                  <span className="mt-6 inline-flex items-center gap-2 font-sans text-[13px] font-semibold text-[color:var(--blue-bright)]">
+                    Learn more
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-                  </Link>
-                </div>
+                  </span>
+                </Link>
               </div>
             ))}
           </RevealGroup>

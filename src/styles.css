@@ -502,6 +502,12 @@
   border-color: var(--hairline);
   color: var(--text-body);
 }
+/* "Live" status chip — brighter than a neutral pill. */
+.pill-live {
+  color: var(--blue-bright);
+  border-color: rgba(43, 107, 255, 0.45);
+  background: rgba(43, 107, 255, 0.1);
+}
 .badge-gold {
   font-family: var(--font-mono);
   font-size: 9.5px;

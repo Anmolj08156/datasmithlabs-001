@@ -1,21 +1,20 @@
-import React, { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal, RevealGroup, SplitText } from "../components/site/Reveal";
 import { SectionRail } from "../components/site/SectionRail";
 import { Canvas3D } from "../components/three/Canvas3D";
-import { toast } from "sonner";
 import {
-  AlertCircle,
   ArrowRight,
   ArrowUpRight,
   Brain,
+  BarChart3,
   Calendar,
-  CheckCircle2,
-  Database,
-  FileText,
+  Check,
+  ClipboardList,
+  FlaskConical,
+  GraduationCap,
   Layers,
   LineChart,
-  Mail,
+  MessagesSquare,
   RotateCcw,
   Search,
   Sparkles,
@@ -25,469 +24,419 @@ import {
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "StudNexus — One Platform. Every Learner." },
+      { title: "Products & Services — DataSmith Research Labs" },
       {
         name: "description",
         content:
-          "The learning operating system that helps learners organize knowledge, understand concepts, practice effectively, and retain information.",
+          "Our services across AI, data science, research and training — plus StudNexus and the products we are building for institutions.",
       },
-      { property: "og:title", content: "StudNexus — One Platform. Every Learner." },
-      { property: "og:description", content: "AI-powered learning operating system." },
+      { property: "og:title", content: "Products & Services — DataSmith Research Labs" },
+      {
+        property: "og:description",
+        content:
+          "AI, data science, research and training services, plus StudNexus and upcoming institutional products.",
+      },
     ],
   }),
   component: ProductsPage,
 });
 
-const targetExams = [
-  "IIT Aspirants",
-  "AIIMS Track",
-  "UPSC 2026",
-  "IIM Bound",
-  "GATE CSE",
-  "State PSC",
+const services = [
+  {
+    id: "ai-ml",
+    icon: Brain,
+    title: "AI & Machine Learning",
+    tagline: "Intelligent systems that learn, adapt and scale.",
+    desc: "We design and ship production machine learning — from framing the problem and building the model to the pipelines that keep it healthy once it is live.",
+    points: [
+      "Custom model development",
+      "Neural networks & deep learning",
+      "MLOps and deployment pipelines",
+      "Monitoring and model retraining",
+    ],
+  },
+  {
+    id: "data-science",
+    icon: BarChart3,
+    title: "Data Science & Analytics",
+    tagline: "Transforming data into actionable insights.",
+    desc: "We turn raw, messy institutional data into decisions people actually make — with statistical honesty about what the data does and does not support.",
+    points: [
+      "Statistical analysis and modelling",
+      "Forecasting and scenario planning",
+      "Business intelligence dashboards",
+      "Data pipelines and warehousing",
+    ],
+  },
+  {
+    id: "research",
+    icon: FlaskConical,
+    title: "Research & Innovation",
+    tagline: "Solving complex problems through rigorous research.",
+    desc: "We partner with universities, public institutions and R&D divisions to take a problem from open question to publishable, deployable result.",
+    points: [
+      "Applied research programs",
+      "Experimental design and review",
+      "Publication and peer-review support",
+      "Long-term R&D partnerships",
+    ],
+  },
+  {
+    id: "training",
+    icon: GraduationCap,
+    title: "Training & Workshops",
+    tagline: "Building capability through knowledge and hands-on experience.",
+    desc: "Programs built and taught by practising researchers, measured against real organisational outcomes rather than attendance sheets.",
+    points: [
+      "Corporate workshops (2–5 days)",
+      "Faculty development programs",
+      "Certification courses",
+      "Cohort mentoring",
+    ],
+  },
 ];
 
-const painPoints = [
+const products = [
   {
-    icon: FileText,
-    title: "Scattered notes",
-    desc: "PDFs, screenshots, and handwritten notes spread across a dozen places you can never find again.",
+    id: "studnexus",
+    name: "StudNexus",
+    status: "Live",
+    live: true,
+    tagline: "One platform. Every learner.",
+    desc: "The learning operating system that helps learners organise knowledge, understand concepts, practise effectively, and retain information long-term — all powered by AI, all in one place.",
+    points: [
+      "AI workspace for all your material",
+      "Smart practice and mock tests",
+      "Spaced-repetition revision vault",
+      "Learning analytics by topic",
+    ],
+    href: "https://studnexus.com",
   },
   {
-    icon: Layers,
-    title: "Too many apps",
-    desc: "A notes app, a flashcard app, a planner, a PDF reader — none of them talk to each other.",
+    id: "exam-management",
+    name: "Exam Management System",
+    status: "In Development",
+    live: false,
+    tagline: "Run an exam cycle without the spreadsheets.",
+    desc: "An end-to-end system for institutions running large examinations — automating the allocation work that currently eats weeks of staff time before every cycle.",
+    points: [
+      "Automatic seat allocation for students",
+      "Automatic invigilator allocation and duty rosters",
+      "Exam scheduling and timetabling",
+      "Room and capacity planning",
+      "Hall ticket generation",
+      "Seating charts and attendance tracking",
+    ],
   },
   {
-    icon: RotateCcw,
-    title: "Poor revision",
-    desc: "You study hard once, then forget most of it because nothing reminds you to review at the right time.",
+    id: "online-counselling",
+    name: "Online Counselling for Institutions",
+    status: "In Development",
+    live: false,
+    tagline: "Admissions counselling, run online end to end.",
+    desc: "A counselling platform for institutions managing admission rounds — choice filling, merit lists and seat allotment handled in one auditable workflow.",
+    points: [
+      "Online choice filling for candidates",
+      "Merit list generation",
+      "Automated seat allotment rounds",
+      "Document verification workflow",
+      "Live admission dashboards",
+    ],
   },
-  {
-    icon: AlertCircle,
-    title: "No progress visibility",
-    desc: "You feel busy but have no real signal on whether you're actually getting closer to mastery.",
-  },
-  {
-    icon: Database,
-    title: "Information overload",
-    desc: "Endless material, infinite tabs, and no system to turn all of it into understanding.",
-  },
-];
-
-const approachSteps = [
-  {
-    step: "Step 1",
-    title: "Understand",
-    desc: "Ingest resources and decode complex theories instantly.",
-  },
-  {
-    step: "Step 2",
-    title: "Practice",
-    desc: "Auto-generate questions calibrated to your skill level.",
-  },
-  {
-    step: "Step 3",
-    title: "Revise",
-    desc: "Trigger active recall with automated spaced-repetition.",
-  },
-  { step: "Step 4", title: "Track", desc: "View detailed topic mastery reports objectively." },
-  { step: "Step 5", title: "Master", desc: "Lock concepts into long-term memory for good." },
 ];
 
 const capabilities = [
   {
     icon: Layers,
     title: "AI Workspace",
-    badge: "Core",
     tagline: "Upload. Understand. Explore.",
     desc: "Bring your PDFs, notes and resources into one intelligent workspace that reads, structures and indexes everything for you.",
   },
   {
     icon: Sparkles,
     title: "Smart Practice",
-    badge: "Practice",
     tagline: "Generate intelligent assessments.",
     desc: "Turn any topic into targeted questions and mock tests calibrated to where you are and where you need to be.",
   },
   {
     icon: Users,
     title: "Community",
-    badge: "Advanced",
     tagline: "Learn together, not alone.",
-    desc: "A shared library where serious learners upload, discover and upvote the best notes for every exam — the smartest study group you'll ever have.",
+    desc: "A shared library where serious learners upload, discover and upvote the best notes for every exam.",
   },
   {
     icon: Calendar,
     title: "Study Planner",
-    badge: "Advanced",
     tagline: "Your exam, perfectly paced.",
     desc: "An adaptive plan that decides what to study and when — built around your syllabus, your exam date and your real progress.",
   },
   {
     icon: RotateCcw,
     title: "Revision Vault",
-    badge: "Advanced",
     tagline: "Never forget important concepts.",
     desc: "A spaced-repetition vault resurfaces the right concept at the right moment — so what you learn actually sticks.",
   },
   {
     icon: Brain,
     title: "Deep Learning Assistant",
-    badge: "AI Assistant",
     tagline: "Learn concepts deeply.",
     desc: "Ask anything and get clear, grounded explanations that adapt to your level — from first principles to exam-ready depth.",
   },
   {
     icon: Search,
     title: "Cross-Document Intelligence",
-    badge: "Cross-Ref AI",
     tagline: "Connect knowledge across resources.",
     desc: "StudNexus links ideas across all your material, surfacing connections you'd never spot reading one file at a time.",
   },
   {
     icon: Sparkles,
     title: "Flashcards",
-    badge: "Active Recall",
     tagline: "Active recall, automated.",
     desc: "Auto-generate flashcards from your material and master them with spaced, self-graded recall sessions.",
   },
   {
     icon: LineChart,
     title: "Learning Analytics",
-    badge: "Progress",
     tagline: "Measure progress objectively.",
     desc: "See mastery by topic, spot weak areas early, and watch real, measurable progress toward your goal.",
   },
 ];
 
 const audiences = [
-  { title: "Engineering", desc: "Core subjects, labs & semesters" },
-  { title: "Medical", desc: "NEET PG, high-volume retention" },
-  { title: "UPSC", desc: "Vast syllabus, made manageable" },
-  { title: "CAT", desc: "Quant, VARC & LRDI mastery" },
-  { title: "GATE", desc: "Concept depth + problem solving" },
-  { title: "State Exams", desc: "Region-specific preparation" },
-  { title: "Certifications", desc: "Professional & upskilling tracks" },
-  { title: "University", desc: "Coursework, projects & exams" },
-];
-
-const workflows = [
-  {
-    num: "1",
-    title: "Create a workspace",
-    desc: "Spin up a dedicated space for a subject, exam or semester.",
-  },
-  {
-    num: "2",
-    title: "Upload learning resources",
-    desc: "Drop in PDFs, notes and material — we structure it instantly.",
-  },
-  {
-    num: "3",
-    title: "Learn with AI",
-    desc: "Explore concepts with an assistant that knows your material.",
-  },
-  {
-    num: "4",
-    title: "Practice",
-    desc: "Generate intelligent questions and assessments on demand.",
-  },
-  {
-    num: "5",
-    title: "Track progress",
-    desc: "Watch mastery grow across every topic, objectively.",
-  },
-  {
-    num: "6",
-    title: "Master concepts",
-    desc: "Revise at the right time and retain knowledge for good.",
-  },
+  "Engineering",
+  "Medical",
+  "UPSC",
+  "CAT",
+  "GATE",
+  "State Exams",
+  "Certifications",
+  "University",
 ];
 
 function ProductsPage() {
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes("@")) {
-      toast.error("Please enter a valid email address.");
-      return;
-    }
-    setIsSubmitting(true);
-
-    try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbxgb_5tjfz4rw1wafg5RezCXbzDVSExLneSo-m7ydCxUIdM9gl28BQbAibll0sBgml9hg/exec",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify({
-            id: "wl_" + Math.random().toString(36).substring(2, 9),
-            email: email.trim().toLowerCase(),
-            name: "",
-            created_at: new Date().toISOString(),
-            source: "website",
-            device: typeof window !== "undefined" ? window.navigator.userAgent : "ssr",
-          }),
-        },
-      );
-
-      setIsSubmitting(false);
-      setSubmitted(true);
-      toast.success("Welcome aboard!", {
-        description: "You've successfully joined the StudNexus early access waitlist.",
-      });
-      try {
-        localStorage.setItem("studnexus_waitlist_email", email);
-      } catch (err) {
-        console.error(err);
-      }
-    } catch (err) {
-      console.error(err);
-      setIsSubmitting(false);
-      toast.error("Subscription failed. Please try again.");
-    }
-  };
-
   return (
     <>
       {/* ═══════ 01 · HERO ═══════ */}
-      <section className="relative min-h-[86vh] flex items-center overflow-hidden bg-[color:var(--void)]">
-        <Canvas3D variant="constellation" className="absolute inset-0 opacity-70" />
-        <div className="glow glow-blue w-[620px] h-[620px] -top-32 right-0 opacity-35" />
+      <section className="relative min-h-[74vh] flex items-center overflow-hidden bg-[color:var(--void)]">
         <div className="absolute inset-0 grid-fade opacity-35 pointer-events-none" />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--void)] via-[color:var(--void)]/70 to-transparent" />
-        <SectionRail num="01" label="Product" />
+        <div className="glow glow-blue w-[560px] h-[560px] top-[6%] right-[4%] opacity-40" />
+        <Canvas3D
+          variant="constellation"
+          className="absolute inset-y-0 right-0 w-full lg:w-[60%] opacity-60 lg:opacity-90"
+        />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--void)] via-[color:var(--void)]/75 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-[color:var(--void)] to-transparent" />
+        <SectionRail num="01" label="Overview" />
 
         <div className="container-wide relative z-10 pt-32 pb-20">
-          <div className="stagger max-w-[640px]">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-[color:var(--hairline-strong)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--blue)] pulse-dot" />
-                <span className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[color:var(--blue-bright)]">
-                  Early access is now open
-                </span>
-              </span>
-              <span className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[color:var(--text-muted)]">
-                A product of DataSmith Research Labs
-              </span>
+          <div className="stagger max-w-[620px]">
+            <p className="eyebrow">Products & Services</p>
+            <h1 className="mt-6 h1">
+              What we build.
+              <br />
+              What we deliver.
+            </h1>
+            <p className="mt-7 body-text text-[16px] max-w-[470px]">
+              Four service lines for institutions that need research done properly — and a growing
+              set of products we build and run ourselves.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a href="#services" className="btn btn-primary">
+                Our Services <ArrowRight className="w-4 h-4" />
+              </a>
+              <a href="#products" className="btn btn-outline">
+                Our Products
+              </a>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <h1 className="mt-7 h1">
+      {/* ═══════ 02 · SERVICES ═══════ */}
+      <section id="services" className="section relative bg-[color:var(--ink)] py-24">
+        <div className="glow glow-blue w-[520px] h-[520px] -top-32 left-1/4 opacity-22" />
+        <SectionRail num="02" label="Services" />
+
+        <div className="container-wide relative z-10">
+          <Reveal>
+            <div className="grid lg:grid-cols-12 gap-6 items-end">
+              <div className="lg:col-span-7">
+                <p className="eyebrow">Our Services</p>
+                <h2 className="mt-5 h2">
+                  <SplitText text="Solutions built on deep expertise." />
+                </h2>
+              </div>
+              <p className="lg:col-span-5 body-text text-[14px] max-w-[340px]">
+                We combine academic rigor with real-world application to deliver solutions that
+                matter.
+              </p>
+            </div>
+          </Reveal>
+
+          <RevealGroup className="mt-14 grid md:grid-cols-2 gap-5" step={110}>
+            {services.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div
+                  key={s.id}
+                  id={s.id}
+                  className="card product-card p-7 h-full flex flex-col scroll-mt-28 group"
+                >
+                  <span className="w-11 h-11 rounded-xl bg-[color:var(--blue)]/12 flex items-center justify-center text-[color:var(--blue-bright)] transition-transform duration-500 group-hover:scale-110">
+                    <Icon className="w-5 h-5" />
+                  </span>
+                  <h3 className="mt-6 h3">{s.title}</h3>
+                  <p className="mt-1.5 font-sans text-[12.5px] text-[color:var(--blue-bright)]">
+                    {s.tagline}
+                  </p>
+                  <p className="mt-4 body-text text-[13.5px]">{s.desc}</p>
+
+                  <ul className="mt-6 space-y-2.5">
+                    {s.points.map((p) => (
+                      <li key={p} className="flex gap-2.5 items-start">
+                        <Check className="w-3.5 h-3.5 mt-1 text-[color:var(--blue-bright)] shrink-0" />
+                        <span className="font-sans text-[13px] text-[color:var(--text-body)]">
+                          {p}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    to="/contact"
+                    className="mt-7 pt-5 border-t border-[color:var(--hairline)] inline-flex items-center gap-2 font-sans text-[13.5px] font-semibold text-white hover:text-[color:var(--blue-bright)] transition-colors group/link"
+                  >
+                    Discuss a project
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+                  </Link>
+                </div>
+              );
+            })}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* ═══════ 03 · PRODUCTS ═══════ */}
+      <section id="products" className="section relative bg-[color:var(--void)] py-24">
+        <div className="absolute inset-0 grid-fade opacity-25 pointer-events-none" />
+        <SectionRail num="03" label="Products" />
+
+        <div className="container-wide relative z-10">
+          <Reveal>
+            <div className="grid lg:grid-cols-12 gap-6 items-end">
+              <div className="lg:col-span-7">
+                <p className="eyebrow">Our Products</p>
+                <h2 className="mt-5 h2">
+                  <SplitText text="Software we build and run ourselves." />
+                </h2>
+              </div>
+              <p className="lg:col-span-5 body-text text-[14px] max-w-[340px]">
+                One platform live today, and two more in development for institutions that run
+                examinations and admissions at scale.
+              </p>
+            </div>
+          </Reveal>
+
+          <RevealGroup className="mt-14 grid lg:grid-cols-3 gap-5" step={120}>
+            {products.map((p) => (
+              <div
+                key={p.id}
+                id={p.id}
+                className="card product-card p-7 h-full flex flex-col scroll-mt-28"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className={p.live ? "pill pill-live gap-2" : "badge-gold"}>
+                    {p.live && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--blue)] pulse-dot" />
+                    )}
+                    {p.status}
+                  </span>
+                  {p.id === "exam-management" && (
+                    <ClipboardList className="w-5 h-5 text-[color:var(--text-muted)]" />
+                  )}
+                  {p.id === "online-counselling" && (
+                    <MessagesSquare className="w-5 h-5 text-[color:var(--text-muted)]" />
+                  )}
+                  {p.live && <Layers className="w-5 h-5 text-[color:var(--text-muted)]" />}
+                </div>
+
+                <h3 className="mt-6 font-display font-medium text-[22px] tracking-[-0.03em] text-white">
+                  {p.name}
+                </h3>
+                <p className="mt-1.5 font-sans text-[12.5px] text-[color:var(--blue-bright)]">
+                  {p.tagline}
+                </p>
+                <p className="mt-4 body-text text-[13.5px]">{p.desc}</p>
+
+                <ul className="mt-6 space-y-2.5 flex-1">
+                  {p.points.map((pt) => (
+                    <li key={pt} className="flex gap-2.5 items-start">
+                      <Check className="w-3.5 h-3.5 mt-1 text-[color:var(--blue-bright)] shrink-0" />
+                      <span className="font-sans text-[13px] text-[color:var(--text-body)]">
+                        {pt}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {p.href ? (
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-7 btn btn-primary btn-sm w-full"
+                  >
+                    Sign up at studnexus.com <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                ) : (
+                  <Link to="/contact" className="mt-7 btn btn-outline btn-sm w-full">
+                    Register interest <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
+              </div>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* ═══════ 04 · STUDNEXUS SPOTLIGHT ═══════ */}
+      <section className="section relative bg-[color:var(--ink)] py-24 overflow-hidden">
+        <Canvas3D variant="flowfield" className="absolute inset-0 opacity-60" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[color:var(--ink)] via-transparent to-[color:var(--ink)]" />
+        <SectionRail num="04" label="StudNexus" />
+
+        <div className="container-wide relative z-10">
+          <Reveal className="max-w-[600px]">
+            <p className="eyebrow">Spotlight</p>
+            <h2 className="mt-5 h2">
               <a
                 href="https://studnexus.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 group hover:text-[color:var(--blue-bright)] transition-colors"
-                title="Visit studnexus.com"
               >
                 StudNexus
-                <ArrowUpRight className="w-7 h-7 opacity-40 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <ArrowUpRight className="w-6 h-6 opacity-40 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </a>
-            </h1>
-
-            <p className="mt-3 font-display font-medium text-[clamp(19px,2.2vw,28px)] tracking-[-0.03em] text-gradient">
+            </h2>
+            <p className="mt-3 font-display font-medium text-[clamp(18px,2vw,26px)] tracking-[-0.03em] text-gradient">
               One platform. Every learner.
             </p>
-            <p className="mt-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
-              The learning operating system
-            </p>
-
-            <p className="mt-6 body-text text-[16px] max-w-[470px]">
-              StudNexus helps learners organize knowledge, understand concepts, practice
-              effectively, and retain information long-term — all powered by AI, all in one place.
-            </p>
-
-            <div className="mt-8 max-w-[480px]">
-              {submitted ? (
-                <div className="card p-5 flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[color:var(--blue-bright)] shrink-0" />
-                  <p className="font-sans text-[14px] text-white/85">
-                    Thank you! You are on the waitlist for early access.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5">
-                  <div className="relative flex-1">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[color:var(--text-muted)]" />
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@email.com"
-                      aria-label="Email address"
-                      className="w-full h-[46px] pl-11 pr-4 rounded-full bg-white/5 border border-[color:var(--hairline-strong)] font-sans text-[14px] text-white placeholder-[color:var(--text-muted)] outline-none focus:border-[color:var(--blue)] focus:bg-white/8 transition-all"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn btn-primary shrink-0"
-                  >
-                    {isSubmitting ? "Sending…" : "Request Early Access"}
-                  </button>
-                </form>
-              )}
-              <p className="mt-3 font-sans text-[12px] text-[color:var(--text-muted)]">
-                No spam. Early access invites only. Unsubscribe anytime.
-              </p>
-            </div>
-          </div>
-
-          <RevealGroup
-            className="mt-14 grid grid-cols-2 gap-4 max-w-[420px]"
-            step={120}
-            direction="scale"
-          >
-            <div className="card p-5">
-              <p className="font-display font-medium text-[30px] tracking-[-0.04em] leading-none">
-                500+
-              </p>
-              <p className="mt-2 font-sans text-[12.5px] text-[color:var(--text-muted)]">
-                Learners on the list
-              </p>
-            </div>
-            <div className="card p-5">
-              <p className="font-display font-medium text-[30px] tracking-[-0.04em] leading-none">
-                20+
-              </p>
-              <p className="mt-2 font-sans text-[12.5px] text-[color:var(--text-muted)]">
-                Campuses in early tests
-              </p>
-            </div>
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* ═══════ MARQUEE ═══════ */}
-      <section className="section bg-[color:var(--ink)] py-8 overflow-hidden">
-        <p className="text-center font-mono text-[9.5px] uppercase tracking-[0.22em] text-[color:var(--text-muted)] mb-5">
-          Trusted by ambitious learners preparing for
-        </p>
-        <div className="marquee-wrap relative">
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[color:var(--ink)] to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[color:var(--ink)] to-transparent z-10 pointer-events-none" />
-          <div className="marquee-track marquee-fast gap-3">
-            {[...targetExams, ...targetExams, ...targetExams].map((exam, i) => (
-              <span
-                key={i}
-                className="shrink-0 px-5 py-2.5 rounded-full border border-[color:var(--hairline)] bg-white/[0.03] font-sans text-[13.5px] text-[color:var(--text-body)] whitespace-nowrap hover:border-[color:var(--blue)] hover:text-white transition-colors"
-              >
-                {exam}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════ 02 · PROBLEM ═══════ */}
-      <section className="section relative bg-[color:var(--void)] py-24">
-        <div className="absolute inset-0 grid-fade opacity-30 pointer-events-none" />
-        <SectionRail num="02" label="Problem" />
-
-        <div className="container-wide relative z-10">
-          <Reveal className="max-w-[560px]">
-            <p className="eyebrow">The Current Learning Experience</p>
-            <h2 className="mt-5 h2">
-              <SplitText text="Studying today is broken into disconnected pieces." />
-            </h2>
             <p className="mt-6 body-text text-[15px]">
-              Most learners aren't short on effort or material. They're short on a system that turns
-              all of it into real understanding.
+              StudNexus brings the entire learning loop together — understand, practise, revise,
+              track — so progress compounds instead of leaking between apps. Sign up directly on
+              studnexus.com.
             </p>
-          </Reveal>
-
-          <RevealGroup className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" step={90}>
-            {painPoints.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.title} className="card hover-lift p-6 h-full group">
-                  <span className="w-11 h-11 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 transition-transform duration-500 group-hover:scale-110">
-                    <Icon className="w-5 h-5" />
-                  </span>
-                  <h3 className="mt-5 h3">{item.title}</h3>
-                  <p className="mt-3 body-text text-[13.5px]">{item.desc}</p>
-                </div>
-              );
-            })}
-
-            <div className="card p-6 h-full flex flex-col justify-between border-[color:var(--blue)]/35 bg-[color:var(--blue)]/[0.07]">
-              <div>
-                <p className="eyebrow">The Outcome</p>
-                <p className="mt-4 font-display font-medium text-[18px] leading-[1.45] tracking-[-0.02em] text-white">
-                  "You feel busy, but rarely in control of what you actually know."
-                </p>
-              </div>
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="#approach"
-                className="mt-7 inline-flex items-center gap-2 font-sans text-[13.5px] font-semibold text-[color:var(--blue-bright)] group/link"
+                href="https://studnexus.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
               >
-                There's a better way
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+                Sign up at studnexus.com <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* ═══════ 03 · APPROACH ═══════ */}
-      <section
-        id="approach"
-        className="section relative bg-[color:var(--ink)] py-24 overflow-hidden"
-      >
-        <Canvas3D variant="flowfield" className="absolute inset-0 opacity-70" />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[color:var(--ink)] via-transparent to-[color:var(--ink)]" />
-        <SectionRail num="03" label="Approach" />
-
-        <div className="container-wide relative z-10">
-          <Reveal className="max-w-[560px]">
-            <p className="eyebrow">The StudNexus Approach</p>
-            <h2 className="mt-5 h2">
-              <SplitText text="Everything you need to learn, in one flow." />
-            </h2>
-            <p className="mt-6 body-text text-[15px]">
-              StudNexus brings the entire learning loop together — so progress compounds instead of
-              leaking between apps.
-            </p>
-          </Reveal>
-
-          <RevealGroup className="mt-14 grid sm:grid-cols-2 lg:grid-cols-5 gap-4" step={100}>
-            {approachSteps.map((item, i) => (
-              <div key={item.title} className="card hover-lift p-6 h-full group">
-                <span className="w-10 h-10 rounded-full bg-[color:var(--blue)]/15 border border-[color:var(--blue)]/30 flex items-center justify-center font-display font-medium text-[14px] text-[color:var(--blue-bright)] transition-transform duration-500 group-hover:scale-110">
-                  {i + 1}
-                </span>
-                <p className="mt-5 font-mono text-[9.5px] uppercase tracking-[0.18em] text-[color:var(--blue-bright)]">
-                  {item.step}
-                </p>
-                <h3 className="mt-1.5 h3">{item.title}</h3>
-                <p className="mt-3 body-text text-[12.5px]">{item.desc}</p>
-              </div>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* ═══════ 04 · CAPABILITIES ═══════ */}
-      <section className="section relative bg-[color:var(--void)] py-24">
-        <div className="glow glow-blue w-[560px] h-[560px] top-1/4 left-1/3 opacity-20" />
-        <SectionRail num="04" label="Features" />
-
-        <div className="container-wide relative z-10">
-          <Reveal className="max-w-[560px]">
-            <p className="eyebrow">Capabilities</p>
-            <h2 className="mt-5 h2">
-              <SplitText text="An intelligent layer over everything you study." />
-            </h2>
-            <p className="mt-6 body-text text-[15px]">
-              Core capabilities working as one system — built to deepen understanding, not just
-              store notes.
-            </p>
           </Reveal>
 
           <RevealGroup className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" step={80}>
@@ -495,99 +444,59 @@ function ProductsPage() {
               const Icon = c.icon;
               return (
                 <div key={c.title} className="card product-card p-6 h-full flex flex-col group">
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="w-11 h-11 rounded-xl bg-[color:var(--blue)]/12 flex items-center justify-center text-[color:var(--blue-bright)] transition-transform duration-500 group-hover:scale-110">
-                      <Icon className="w-5 h-5" />
-                    </span>
-                    <span className="pill shrink-0">{c.badge}</span>
-                  </div>
+                  <span className="w-10 h-10 rounded-xl bg-[color:var(--blue)]/12 flex items-center justify-center text-[color:var(--blue-bright)] transition-transform duration-500 group-hover:scale-110">
+                    <Icon className="w-4 h-4" />
+                  </span>
                   <h3 className="mt-5 h3">{c.title}</h3>
-                  <p className="mt-1.5 font-sans text-[12.5px] text-[color:var(--blue-bright)]">
+                  <p className="mt-1.5 font-sans text-[12px] text-[color:var(--blue-bright)]">
                     {c.tagline}
                   </p>
-                  <p className="mt-3 body-text text-[13.5px] flex-1">{c.desc}</p>
+                  <p className="mt-3 body-text text-[13px] flex-1">{c.desc}</p>
                 </div>
               );
             })}
           </RevealGroup>
-        </div>
-      </section>
 
-      {/* ═══════ 05 · AUDIENCES ═══════ */}
-      <section className="section relative bg-[color:var(--ink)] py-24">
-        <SectionRail num="05" label="For Whom" />
-        <div className="container-wide relative z-10">
-          <Reveal className="max-w-[520px]">
-            <p className="eyebrow">Built for Every Learner</p>
-            <h2 className="mt-5 h2">
-              <SplitText text="One platform, tuned to your goal." />
-            </h2>
-          </Reveal>
-
-          <RevealGroup className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4" step={70}>
-            {audiences.map((item) => (
-              <div key={item.title} className="card hover-lift p-6 h-full">
-                <h3 className="h3">{item.title}</h3>
-                <p className="mt-2.5 body-text text-[12.5px]">{item.desc}</p>
-              </div>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* ═══════ 06 · HOW IT WORKS ═══════ */}
-      <section className="section relative bg-[color:var(--void)] py-24">
-        <div className="absolute inset-0 grid-fade opacity-25 pointer-events-none" />
-        <SectionRail num="06" label="Workflow" />
-
-        <div className="container-wide relative z-10">
-          <Reveal className="max-w-[540px]">
-            <p className="eyebrow">How It Works</p>
-            <h2 className="mt-5 h2">
-              <SplitText text="From scattered material to mastery, in six steps." />
-            </h2>
-          </Reveal>
-
-          <RevealGroup className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" step={85}>
-            {workflows.map((step) => (
-              <div key={step.num} className="card hover-lift p-6 h-full group">
-                <span className="w-10 h-10 rounded-full bg-gradient-to-br from-[color:var(--blue)] to-[#1b4bd0] flex items-center justify-center font-display font-medium text-[14px] text-white transition-transform duration-500 group-hover:scale-110">
-                  {step.num}
+          <Reveal className="mt-12">
+            <p className="label text-[color:var(--text-muted)]">Built for</p>
+            <div className="mt-5 flex flex-wrap gap-2.5">
+              {audiences.map((a) => (
+                <span key={a} className="pill">
+                  {a}
                 </span>
-                <h3 className="mt-5 h3">{step.title}</h3>
-                <p className="mt-3 body-text text-[13.5px]">{step.desc}</p>
-              </div>
-            ))}
-          </RevealGroup>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ═══════ 07 · CTA ═══════ */}
+      {/* ═══════ 05 · CTA ═══════ */}
       <section className="section relative min-h-[64vh] flex items-center bg-[color:var(--void)] overflow-hidden">
         <Canvas3D variant="tunnel" className="absolute inset-0 opacity-85" />
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[color:var(--void)] via-[color:var(--void)]/72 to-transparent" />
-        <SectionRail num="07" label="Join" />
+        <SectionRail num="05" label="Lets Talk" />
 
         <div className="container-wide relative z-10 py-24">
           <Reveal className="max-w-[520px]" direction="left">
-            <p className="eyebrow">Ready to Upgrade Your System?</p>
+            <p className="eyebrow">Ready to Start?</p>
             <h2 className="mt-5 h2">
-              <SplitText text="Learn deeper. Remember longer." />
+              <SplitText text="Tell us what you need built." />
             </h2>
             <p className="mt-6 body-text text-[15px] max-w-[400px]">
-              Get started on the waitlist to secure early access invites for StudNexus.
+              Whether it's a service engagement or early access to a product we're building — we'd
+              like to hear about it.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
+              <Link to="/contact" className="btn btn-primary">
+                Schedule a Consultation <ArrowRight className="w-4 h-4" />
+              </Link>
               <a
                 href="https://studnexus.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary"
+                className="btn btn-outline"
               >
                 Visit studnexus.com <ArrowUpRight className="w-4 h-4" />
-              </a>
-              <a href="#approach" className="btn btn-outline">
-                Learn the Approach
               </a>
             </div>
           </Reveal>
