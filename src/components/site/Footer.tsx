@@ -23,13 +23,17 @@ export function Footer() {
 
       <div className="container-wide relative z-10 pt-16 pb-10">
         <RevealGroup className="grid md:grid-cols-12 gap-y-10 gap-x-8" step={80}>
-          <div className="md:col-span-5">
-            <Link to="/" className="flex items-center gap-2.5 group w-fit">
-              <span className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center transition-transform duration-400 group-hover:rotate-[18deg]">
-                <span className="w-2.5 h-2.5 rounded-[3px] bg-[color:var(--cyan)]" />
-              </span>
+          <div className="md:col-span-4">
+            <Link to="/" className="flex items-center gap-3 group w-fit">
+              <img
+                src="/logo-mark.png"
+                alt=""
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-[11px] transition-transform duration-400 group-hover:scale-105"
+              />
               <span className="font-display font-semibold text-[17px] tracking-[-0.02em]">
-                DataSmith
+                DataSmith <span className="font-medium text-white/55">Research Labs</span>
               </span>
             </Link>
             <p className="mt-5 font-sans text-[15px] leading-[1.65] text-white/60 max-w-[300px]">
@@ -71,7 +75,8 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div className="md:col-span-2">
+          {/* Wider than the other columns so the email fits on one line. */}
+          <div className="md:col-span-3">
             <p className="label text-[10px] text-white/35">Contact</p>
             <ul className="mt-5 space-y-3 font-sans text-[15px]">
               <li>

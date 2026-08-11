@@ -95,10 +95,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Transforming data into discovery. AI, data science, and research consulting for serious institutions.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:image", content: "https://datasmithlabs.com/og-image.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://datasmithlabs.com/og-image.png" },
       { name: "twitter:site", content: "@DataSmithLabs" },
+      { name: "theme-color", content: "#102e62" },
     ],
     links: [
+      // Browsers request /favicon.ico regardless of the tags below, so it ships too.
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       {
         rel: "preconnect",
         href: "https://fonts.googleapis.com",

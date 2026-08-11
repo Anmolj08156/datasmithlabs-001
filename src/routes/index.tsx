@@ -14,13 +14,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Datasmith Labs | AI Solutions & Research" },
+      { title: "DataSmith Research Labs — Transforming Data into Discovery" },
       {
         name: "description",
         content:
-          "Datasmith Labs provides AI solutions, enterprise automation, research services and intelligent digital products.",
+          "DataSmith Research Labs provides AI solutions, enterprise automation, research services and intelligent digital products.",
       },
-      { property: "og:title", content: "Datasmith Labs" },
+      { property: "og:title", content: "DataSmith Research Labs" },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://datasmithlabs.com" },
     ],

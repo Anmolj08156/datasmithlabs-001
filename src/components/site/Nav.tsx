@@ -40,15 +40,20 @@ export function Nav() {
           className={`mx-auto max-w-[1180px] flex items-center justify-between h-[60px] pl-5 pr-2 rounded-full transition-all duration-400 ${
             scrolled
               ? "bg-white/85 backdrop-blur-xl border border-[color:var(--border)] shadow-[0_8px_30px_-12px_rgba(11,21,38,0.18)]"
-              : "bg-white/70 backdrop-blur-md border border-white/60"
+              : "bg-white/85 backdrop-blur-md border border-white/60"
           }`}
         >
           <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-            <span className="w-7 h-7 rounded-lg bg-[color:var(--ink)] flex items-center justify-center transition-transform duration-400 group-hover:rotate-[18deg]">
-              <span className="w-2.5 h-2.5 rounded-[3px] bg-[color:var(--cyan)]" />
-            </span>
-            <span className="font-display font-semibold text-[16px] tracking-[-0.02em] text-[color:var(--ink)]">
-              DataSmith
+            <img
+              src="/logo-mark.png"
+              alt=""
+              width={32}
+              height={32}
+              className="w-8 h-8 rounded-[9px] transition-transform duration-400 group-hover:scale-105"
+            />
+            <span className="font-display font-semibold text-[15px] sm:text-[16px] tracking-[-0.02em] text-[color:var(--ink)] whitespace-nowrap">
+              DataSmith{" "}
+              <span className="font-medium text-[color:var(--text-body)]">Research Labs</span>
             </span>
           </Link>
 
